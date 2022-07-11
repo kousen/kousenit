@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/kenkousen
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.kousenit.com
+  * I am kenkousen (https://keybase.io/kenkousen) on keybase.
+  * I have a public key with fingerprint 803D 8209 EE54 9E6B 716A  D409 17B0 B54A 9BF8 18DD
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "01010d57655e16c74ecfeeef2bb90d9502753053f4db0751e8a2d6338a5624ee221a0a",
+            "fingerprint": "803d8209ee549e6b716ad40917b0b54a9bf818dd",
+            "host": "keybase.io",
+            "key_id": "17b0b54a9bf818dd",
+            "kid": "01010d57655e16c74ecfeeef2bb90d9502753053f4db0751e8a2d6338a5624ee221a0a",
+            "uid": "5a42b675a70e0eb30617a6ae01869519",
+            "username": "kenkousen"
+        },
+        "service": {
+            "hostname": "www.kousenit.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1472749840,
+    "expire_in": 157680000,
+    "prev": "9785c8aae553d982b631a980a2de884fb1b4243fe386bed57f1dda80024ef783",
+    "seqno": 24,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.56
+Comment: https://keybase.io/crypto
+
+yMImAnicrVJbbA1BGD6litOgjbg1iq4goanZy+zOnkhdSoMoCREv5GRm59/aXnaP
+PdtWiZAiHhoJDy4RdzkV4sElIhqkOG4RNEioUI0gadBQEiFNavbgzaOZh8n/z/d9
+8/1fJj1sYCSadRm8+UWJrK6s+9cP1kVW3aV5GyXm8UYptlGqhswBNRySQbza4VJM
+QrLYHBs6xiDrlqGBZQOArTBmIm5ipBhYRVi1Nc6QgWUgVOG6qhKKdUUDUBSZIioV
+S7bjVoKf8B03ELIEqZwoyATAmgk6M2Sdcg2ZssEQwxo1mU1kwrkgrvWSIUOYYzQJ
+JY4neqKIZ+z9A/+ffddl5DDVFKYbmBoIEDAV6bJBdQpIJrqJZTMEJsF3aS1kvLrV
+nqhdaVOxJNr1jgVhsuEofyANDQ0lvzFOUGJ5tUIg4XuBZ3k14nZtECRiITloTGTQ
+wOJ/dOLMcbnIUhDqwU86nivFZIG0AicUljVDMTSTaKhYgvUJx4e4EyJEEgSJFT4D
+9ULSNAi2CKWAscpNIqZTZWoSJGIAQjSbyUxTNNUGlegMRJK2zDkVGiId2yCqFE62
+zvWkmKIJn7RSaCadSpcGdT5Im260rc6OZEUjOYMGhJ8sEh2a9/fr7To2uH/5kCM7
+7leMPVF8p7ypvGl+Z82kso4ivqz55Ie01dZy9V5+e+Xh1rn6tv4vs6+dzWe8/WlH
+rCJ1qHVv6ULUXHqgasvO92eWDvy44tbhme5VPad9w4vB43/G188aHvWtmyVvuvfU
+T43mJGvUD5ce32t7vf/bhdN706fAeZWf/l4w4cnig9MqYuMX1VqFFws39+DpC0/1
+rBm9vXNJb+68lyN7x/R+zuN9qVRZ45QNt3Ov9LeMuJGa8PDHjCY0++inH83Ptja/
+8/vG3U0XoN39D0rnjLpcNvl5ERSWXli2MvvRxDEXn6gfW4e83V3ede7T8RGDnKpR
+3Ut63i1At7/u6xzeeDOaOl9Y/eoX+t5BnA==
+=9uoT
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/kenkousen
+
+==================================================================
