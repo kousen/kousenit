@@ -1135,7 +1135,7 @@ In a reactive application, the return type would have been <code>Mono&lt;AstroRe
 </div>
 </li>
 <li>
-<p>Note the use of the SLF4J <code>Logger</code> class to log the jokes to the console. Not everything in Spring needs to be injected. Spring includes multiple loggers in the classpath. This example uses SLF4J.</p>
+<p>Note the use of the SLF4J <code>Logger</code> class to log the responses to the console. Not everything in Spring needs to be injected. Spring includes multiple loggers in the classpath. This example uses SLF4J.</p>
 </li>
 <li>
 <p>Execute the test and make any needed corrections until it passes.</p>
@@ -2067,15 +2067,12 @@ The address components can be anything appropriate to the host country. The URL 
     <span class="annotation">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)
     <span class="directive">private</span> <span class="predefined-type">Integer</span> id;
 
-    <span class="annotation">@Column</span>(nullable = <span class="predefined-constant">false</span>)
     <span class="annotation">@Enumerated</span>(EnumType.STRING)
     <span class="directive">private</span> Rank rank;
 
-    <span class="annotation">@Column</span>(nullable = <span class="predefined-constant">false</span>, name = <span class="string"><span class="delimiter">&quot;</span><span class="content">first_name</span><span class="delimiter">&quot;</span></span>)
-    <span class="directive">private</span> <span class="predefined-type">String</span> first;
+    <span class="directive">private</span> <span class="predefined-type">String</span> firstName;
 
-    <span class="annotation">@Column</span>(nullable = <span class="predefined-constant">false</span>, name = <span class="string"><span class="delimiter">&quot;</span><span class="content">last_name</span><span class="delimiter">&quot;</span></span>)
-    <span class="directive">private</span> <span class="predefined-type">String</span> last;
+    <span class="directive">private</span> <span class="predefined-type">String</span> lastName;
 
 <span class="comment">// ... rest as before ...</span>
 }</code></pre>
@@ -2188,7 +2185,7 @@ The address components can be anything appropriate to the host country. The URL 
     <span class="annotation">@Test</span>
     <span class="directive">public</span> <span class="type">void</span> findAll() <span class="directive">throws</span> <span class="exception">Exception</span> {
         <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; dbNames = dao.findAll().stream()
-                                  .map(Officer::getLast)
+                                  .map(Officer::getLastName)
                                   .collect(Collectors.toList());
         assertThat(dbNames).contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Kirk</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Picard</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Sisko</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Janeway</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Archer</span><span class="delimiter">&quot;</span></span>);
     }
