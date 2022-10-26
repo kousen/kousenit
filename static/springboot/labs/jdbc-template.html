@@ -481,22 +481,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">Officer</span> {
     <span class="directive">private</span> <span class="predefined-type">Integer</span> id;
     <span class="directive">private</span> Rank rank;
-    <span class="directive">private</span> <span class="predefined-type">String</span> first;
-    <span class="directive">private</span> <span class="predefined-type">String</span> last;
+    <span class="directive">private</span> <span class="predefined-type">String</span> firstName;
+    <span class="directive">private</span> <span class="predefined-type">String</span> lastName;
 
     <span class="directive">public</span> Officer() {}
 
-    <span class="directive">public</span> Officer(Rank rank, <span class="predefined-type">String</span> first, <span class="predefined-type">String</span> last) {
+    <span class="directive">public</span> Officer(Rank rank, <span class="predefined-type">String</span> firstName, <span class="predefined-type">String</span> lastName) {
         <span class="local-variable">this</span>.rank = rank;
-        <span class="local-variable">this</span>.first = first;
-        <span class="local-variable">this</span>.last = last;
+        <span class="local-variable">this</span>.firstName = firstName;
+        <span class="local-variable">this</span>.lastName = lastName;
     }
 
-    <span class="directive">public</span> Officer(<span class="predefined-type">Integer</span> id, Rank rank, <span class="predefined-type">String</span> first, <span class="predefined-type">String</span> last) {
+    <span class="directive">public</span> Officer(<span class="predefined-type">Integer</span> id, Rank rank, <span class="predefined-type">String</span> firstName, <span class="predefined-type">String</span> lastName) {
         <span class="local-variable">this</span>.id = id;
         <span class="local-variable">this</span>.rank = rank;
-        <span class="local-variable">this</span>.first = first;
-        <span class="local-variable">this</span>.last = last;
+        <span class="local-variable">this</span>.firstName = firstName;
+        <span class="local-variable">this</span>.lastName = lastName;
     }
 
     <span class="directive">public</span> <span class="predefined-type">Integer</span> getId() {
@@ -515,20 +515,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         <span class="local-variable">this</span>.rank = rank;
     }
 
-    <span class="directive">public</span> <span class="predefined-type">String</span> getFirst() {
-        <span class="keyword">return</span> first;
+    <span class="directive">public</span> <span class="predefined-type">String</span> getFirstName() {
+        <span class="keyword">return</span> firstName;
     }
 
-    <span class="directive">public</span> <span class="type">void</span> setFirst(<span class="predefined-type">String</span> first) {
-        <span class="local-variable">this</span>.first = first;
+    <span class="directive">public</span> <span class="type">void</span> setFirstName(<span class="predefined-type">String</span> firstName) {
+        <span class="local-variable">this</span>.firstName = firstName;
     }
 
-    <span class="directive">public</span> <span class="predefined-type">String</span> getLast() {
-        <span class="keyword">return</span> last;
+    <span class="directive">public</span> <span class="predefined-type">String</span> getLastName() {
+        <span class="keyword">return</span> lastName;
     }
 
-    <span class="directive">public</span> <span class="type">void</span> setLast(<span class="predefined-type">String</span> last) {
-        <span class="local-variable">this</span>.last = last;
+    <span class="directive">public</span> <span class="type">void</span> setLastName(<span class="predefined-type">String</span> lastName) {
+        <span class="local-variable">this</span>.lastName = lastName;
     }
 
     <span class="annotation">@Override</span>
@@ -536,8 +536,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Officer{</span><span class="delimiter">&quot;</span></span> +
                 <span class="string"><span class="delimiter">&quot;</span><span class="content">id=</span><span class="delimiter">&quot;</span></span> + id +
                 <span class="string"><span class="delimiter">&quot;</span><span class="content">, rank=</span><span class="delimiter">&quot;</span></span> + rank +
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">, first='</span><span class="delimiter">&quot;</span></span> + first + <span class="string"><span class="delimiter">'</span><span class="char">\'</span><span class="delimiter">'</span></span> +
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">, last='</span><span class="delimiter">&quot;</span></span> + last + <span class="string"><span class="delimiter">'</span><span class="char">\'</span><span class="delimiter">'</span></span> +
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">, firstName='</span><span class="delimiter">&quot;</span></span> + firstName + <span class="string"><span class="delimiter">'</span><span class="char">\'</span><span class="delimiter">'</span></span> +
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">, lastName='</span><span class="delimiter">&quot;</span></span> + lastName + <span class="string"><span class="delimiter">'</span><span class="char">\'</span><span class="delimiter">'</span></span> +
                 <span class="string"><span class="delimiter">'</span><span class="content">}</span><span class="delimiter">'</span></span>;
     }
 
@@ -550,16 +550,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
         <span class="keyword">if</span> (!id.equals(officer.id)) <span class="keyword">return</span> <span class="predefined-constant">false</span>;
         <span class="keyword">if</span> (rank != officer.rank) <span class="keyword">return</span> <span class="predefined-constant">false</span>;
-        <span class="keyword">if</span> (first != <span class="predefined-constant">null</span> ? !first.equals(officer.first) : officer.first != <span class="predefined-constant">null</span>) <span class="keyword">return</span> <span class="predefined-constant">false</span>;
-        <span class="keyword">return</span> last.equals(officer.last);
+        <span class="keyword">if</span> (first != <span class="predefined-constant">null</span> ? !firstName.equals(officer.firstName) : officer.firstName != <span class="predefined-constant">null</span>) <span class="keyword">return</span> <span class="predefined-constant">false</span>;
+        <span class="keyword">return</span> lastName.equals(officer.lastName);
     }
 
     <span class="annotation">@Override</span>
     <span class="directive">public</span> <span class="type">int</span> hashCode() {
         <span class="type">int</span> result = id.hashCode();
         result = <span class="integer">31</span> * result + rank.hashCode();
-        result = <span class="integer">31</span> * result + (first != <span class="predefined-constant">null</span> ? first.hashCode() : <span class="integer">0</span>);
-        result = <span class="integer">31</span> * result + last.hashCode();
+        result = <span class="integer">31</span> * result + (firstName != <span class="predefined-constant">null</span> ? firstName.hashCode() : <span class="integer">0</span>);
+        result = <span class="integer">31</span> * result + lastName.hashCode();
         <span class="keyword">return</span> result;
     }
 }</code></pre>
@@ -757,8 +757,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span class="directive">public</span> Officer save(Officer officer) {
     <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>,<span class="predefined-type">Object</span>&gt; parameters = <span class="keyword">new</span> <span class="predefined-type">HashMap</span>&lt;&gt;();
     parameters.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">rank</span><span class="delimiter">&quot;</span></span>, officer.getRank());
-    parameters.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">first_name</span><span class="delimiter">&quot;</span></span>, officer.getFirst());
-    parameters.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">last_name</span><span class="delimiter">&quot;</span></span>, officer.getLast());
+    parameters.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">first_name</span><span class="delimiter">&quot;</span></span>, officer.getFirstName());
+    parameters.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">last_name</span><span class="delimiter">&quot;</span></span>, officer.getLastName());
     <span class="predefined-type">Integer</span> newId = (<span class="predefined-type">Integer</span>) insertOfficer.executeAndReturnKey(parameters);
     officer.setId(newId);
     <span class="keyword">return</span> officer;
@@ -833,13 +833,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </li>
 <li>
-<p>The rest of the tests are pretty straightforward, other than the fact we&#8217;ll use Java 8 constructs to implement them.</p>
+<p>The rest of the tests are pretty straightforward, other than the fact we will use Java 8 constructs to implement them.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
 <span class="directive">public</span> <span class="type">void</span> findAll() <span class="directive">throws</span> <span class="exception">Exception</span> {
     <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; dbNames = dao.findAll().stream()
-            .map(Officer::getLast)
+            .map(Officer::getLastName)
             .collect(Collectors.toList());
     assertThat(dbNames).contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Kirk</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Picard</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Sisko</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Janeway</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Archer</span><span class="delimiter">&quot;</span></span>);
 }
@@ -887,7 +887,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-05-09 12:52:20 -0400
+Last updated 2022-10-26 10:10:46 -0400
 </div>
 </div>
 <style>

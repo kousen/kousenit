@@ -459,19 +459,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Create a new Spring Boot project (either by using the Initializr at <a href="http://start.spring.io" class="bare">http://start.spring.io</a> or using your IDE) called <code>restclient</code>. Add the <em>Spring Reactive Web</em> dependency, but no others are necessary.</p>
 </li>
 <li>
-<p>Create a service class called <code>JokeService</code> in a <code>com.oreilly.restclient.services</code> package under <code>src/main/java</code></p>
+<p>Create a service class called <code>AstroService</code> in a <code>com.oreilly.restclient.services</code> package under <code>src/main/java</code></p>
 </li>
 <li>
 <p>Add the annotation <code>@Service</code> to the class (from the <code>org.springframework.stereotype</code> package, so you&#8217;ll need an <code>import</code> statement)</p>
 </li>
 <li>
-<p>Add a private attribute to <code>JokeService</code> of type <code>WebClient</code> (from <code>org.springframework.web.reactive.function.client</code> package) called <code>client</code></p>
+<p>Add a private attribute to <code>AstroService</code> of type <code>WebClient</code> (from <code>org.springframework.web.reactive.function.client</code> package) called <code>client</code></p>
 </li>
 <li>
-<p>Add a constructor to <code>JokeService</code> that takes a single argument of type <code>WebClient.Builder</code> called <code>builder</code>.</p>
+<p>Add a constructor to <code>AstroService</code> that takes a single argument of type <code>WebClient.Builder</code> called <code>builder</code>.</p>
 </li>
 <li>
-<p>Inside the constructor, set the base URL using the <code>baseUrl("http://api.icndb.com")</code> method on the builder, then invoke <code>build()</code> method and assign the result to the <code>client</code> attribute. The argument will be <em>autowired</em> into the constructor from the application context.</p>
+<p>Inside the constructor, set the base URL using the <code>baseUrl("http://api.open-notify.org")</code> method on the builder, then invoke <code>build()</code> method and assign the result to the <code>client</code> attribute. The argument will be <em>autowired</em> into the constructor from the application context.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -486,59 +486,64 @@ If you provide only a single constructor in a class, Spring will inject all the 
 </div>
 </li>
 <li>
-<p>The site providing the joke API is <a href="http://icndb.com" class="bare">http://icndb.com</a>, the Internet Chuck Norris Database. The site exposes the jokes through the URL <a href="http://api.icndb.com" class="bare">http://api.icndb.com</a>. The API supports a few properties that will be useful here: the client can specify the hero&#8217;s first and last names and the joke category.</p>
+<p>The site providing the Astro API is <a href="http://api.open-notify.org" class="bare">http://api.open-notify.org</a>, which processes NASA data. One of its services returns the list of astronauts currently in space.</p>
 </li>
 <li>
-<p>Add a <code>public</code> method to the service called <code>getJoke</code> that takes two <code>String</code> arguments, <code>first</code> and <code>last</code> and returns a <code>String</code></p>
+<p>Add a <code>public</code> method to the service called <code>getAstroResponse</code>.</p>
 </li>
 <li>
 <p>The <code>WebClient</code> class provides a fluent interface for making a call to a restful web service. This will require creating Java classes that map to the JSON structure. A typical example of the JSON response is:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">success</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>: {
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="integer">268</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">joke</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Time waits for no man. Unless that man is Chuck Norris.</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">categories</span><span class="delimiter">&quot;</span></span>: [
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">nerdy</span><span class="delimiter">&quot;</span></span>
-    ]
-  }
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">message</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">success</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">number</span><span class="delimiter">&quot;</span></span>: NUMBER_OF_PEOPLE_IN_SPACE,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">people</span><span class="delimiter">&quot;</span></span>: [
+    {<span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: NAME, <span class="key"><span class="delimiter">&quot;</span><span class="content">craft</span><span class="delimiter">&quot;</span></span>: SPACECRAFT_NAME},
+    ...
+  ]
 }</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Each of the two JSON objects needs to be mapped to a class. Create a class called <code>JokeValue</code> in the <code>com.oreilly.restclient.json</code> package that maps to the JSON object assigned to <code>value</code>, as shown:</p>
+<p>Each of the two JSON objects needs to be mapped to a class. Create a class called <code>Assignment</code> in the <code>com.oreilly.restclient.json</code> package that maps to the JSON object assigned to <code>value</code>, as shown:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">JokeValue</span> {
-    <span class="directive">private</span> <span class="type">int</span> id;
-    <span class="directive">private</span> <span class="predefined-type">String</span> joke;
-    <span class="directive">private</span> <span class="predefined-type">String</span><span class="type">[]</span> categories;
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">Assignment</span> {
+    <span class="directive">private</span> <span class="predefined-type">String</span> name;
+    <span class="directive">private</span> <span class="predefined-type">String</span> craft;
 
-    <span class="directive">public</span> <span class="type">int</span> getId() {
-        <span class="keyword">return</span> id;
+    <span class="directive">public</span> Assignment() {
     }
 
-    <span class="directive">public</span> <span class="type">void</span> setId(<span class="type">int</span> id) {
-        <span class="local-variable">this</span>.id = id;
+    <span class="directive">public</span> Assignment(<span class="predefined-type">String</span> name, <span class="predefined-type">String</span> craft) {
+        <span class="local-variable">this</span>.name = name;
+        <span class="local-variable">this</span>.craft = craft;
     }
 
-    <span class="directive">public</span> <span class="predefined-type">String</span> getJoke() {
-        <span class="keyword">return</span> joke;
+    <span class="directive">public</span> <span class="predefined-type">String</span> getName() {
+        <span class="keyword">return</span> name;
     }
 
-    <span class="directive">public</span> <span class="type">void</span> setJoke(<span class="predefined-type">String</span> joke) {
-        <span class="local-variable">this</span>.joke = joke;
+    <span class="directive">public</span> <span class="type">void</span> setName(<span class="predefined-type">String</span> name) {
+        <span class="local-variable">this</span>.name = name;
     }
 
-    <span class="directive">public</span> <span class="predefined-type">String</span><span class="type">[]</span> getCategories() {
-        <span class="keyword">return</span> categories;
+    <span class="directive">public</span> <span class="predefined-type">String</span> getCraft() {
+        <span class="keyword">return</span> craft;
     }
 
-    <span class="directive">public</span> <span class="type">void</span> setCategories(<span class="predefined-type">String</span><span class="type">[]</span> categories) {
-        <span class="local-variable">this</span>.categories = categories;
+    <span class="directive">public</span> <span class="type">void</span> setCraft(<span class="predefined-type">String</span> craft) {
+        <span class="local-variable">this</span>.craft = craft;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">String</span> toString() {
+        <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Assignment{</span><span class="delimiter">&quot;</span></span> +
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">name='</span><span class="delimiter">&quot;</span></span> + name + <span class="string"><span class="delimiter">'</span><span class="char">\'</span><span class="delimiter">'</span></span> +
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">, craft='</span><span class="delimiter">&quot;</span></span> + craft + <span class="string"><span class="delimiter">'</span><span class="char">\'</span><span class="delimiter">'</span></span> +
+                <span class="string"><span class="delimiter">'</span><span class="content">}</span><span class="delimiter">'</span></span>;
     }
 }</code></pre>
 </div>
@@ -557,54 +562,78 @@ It is not actually necessary to map all the included fields, but the response is
 </div>
 </li>
 <li>
-<p>Add another class called <code>JokeResponse</code> as shown below. You could use annotations from the included Jackson 2 JSON parser to map the properties to different attribute names, but in this case it&#8217;s easy enough to make them the same.</p>
+<p>Add another class called <code>AstroResponse</code> as shown below. You could use annotations from the included Jackson 2 JSON parser to map the properties to different attribute names, but in this case it&#8217;s easy enough to make them the same.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.oreilly.restclient.json</span>;
 
-<span class="directive">public</span> <span class="type">class</span> <span class="class">JokeResponse</span> {
-    <span class="directive">private</span> <span class="predefined-type">String</span> type;
-    <span class="directive">private</span> JokeValue value;
+<span class="keyword">import</span> <span class="include">java.util.List</span>;
 
-    <span class="directive">public</span> <span class="predefined-type">String</span> getType() {
-        <span class="keyword">return</span> type;
+<span class="directive">public</span> <span class="type">class</span> <span class="class">AstroResponse</span> {
+    <span class="directive">private</span> <span class="predefined-type">String</span> message;
+    <span class="directive">private</span> <span class="type">int</span> number;
+    <span class="directive">private</span> <span class="predefined-type">List</span>&lt;Assignment&gt; people;
+
+    <span class="directive">public</span> AstroResponse() {
     }
 
-    <span class="directive">public</span> <span class="type">void</span> setType(<span class="predefined-type">String</span> type) {
-        <span class="local-variable">this</span>.type = type;
+    <span class="directive">public</span> AstroResponse(<span class="predefined-type">String</span> message, <span class="type">int</span> number, <span class="predefined-type">List</span>&lt;Assignment&gt; people) {
+        <span class="local-variable">this</span>.message = message;
+        <span class="local-variable">this</span>.number = number;
+        <span class="local-variable">this</span>.people = people;
     }
 
-    <span class="directive">public</span> JokeValue getValue() {
-        <span class="keyword">return</span> value;
+    <span class="directive">public</span> <span class="predefined-type">String</span> getMessage() {
+        <span class="keyword">return</span> message;
     }
 
-    <span class="directive">public</span> <span class="type">void</span> setValue(JokeValue value) {
-        <span class="local-variable">this</span>.value = value;
+    <span class="directive">public</span> <span class="type">void</span> setMessage(<span class="predefined-type">String</span> message) {
+        <span class="local-variable">this</span>.message = message;
+    }
+
+    <span class="directive">public</span> <span class="type">int</span> getNumber() {
+        <span class="keyword">return</span> number;
+    }
+
+    <span class="directive">public</span> <span class="type">void</span> setNumber(<span class="type">int</span> number) {
+        <span class="local-variable">this</span>.number = number;
+    }
+
+    <span class="directive">public</span> <span class="predefined-type">List</span>&lt;Assignment&gt; getPeople() {
+        <span class="keyword">return</span> people;
+    }
+
+    <span class="directive">public</span> <span class="type">void</span> setPeople(<span class="predefined-type">List</span>&lt;Assignment&gt; people) {
+        <span class="local-variable">this</span>.people = people;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">String</span> toString() {
+        <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">AstroResponse{</span><span class="delimiter">&quot;</span></span> +
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">message='</span><span class="delimiter">&quot;</span></span> + message + <span class="string"><span class="delimiter">'</span><span class="char">\'</span><span class="delimiter">'</span></span> +
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">, number=</span><span class="delimiter">&quot;</span></span> + number +
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">, people=</span><span class="delimiter">&quot;</span></span> + people +
+                <span class="string"><span class="delimiter">'</span><span class="content">}</span><span class="delimiter">'</span></span>;
     }
 }</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Now the JSON response from the web service can be converted into an instance of the <code>JokeResponse</code> class. The following code should be added to the <code>getJoke</code> method to do so:</p>
+<p>Now the JSON response from the web service can be converted into an instance of the <code>AstroResponse</code> class. The following code should be added to the <code>getAstroResponse</code> method to do so:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">return</span> client.get()
-            .uri(uriBuilder -&gt; uriBuilder.path(<span class="string"><span class="delimiter">&quot;</span><span class="content">/jokes/random</span><span class="delimiter">&quot;</span></span>)
-                        .queryParam(<span class="string"><span class="delimiter">&quot;</span><span class="content">limitTo</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">[nerdy]</span><span class="delimiter">&quot;</span></span>)
-                        .queryParam(<span class="string"><span class="delimiter">&quot;</span><span class="content">firstName</span><span class="delimiter">&quot;</span></span>, first)
-                        .queryParam(<span class="string"><span class="delimiter">&quot;</span><span class="content">lastName</span><span class="delimiter">&quot;</span></span>, last)
-                        .build())
-            .accept(MediaType.APPLICATION_JSON)
-            .retrieve()
-            .bodyToMono(JokeResponse.class)
-            .map(jokeResponse -&gt; jokeResponse.getValue().getJoke())
-            .block(<span class="predefined-type">Duration</span>.ofSeconds(<span class="integer">2</span>));</code></pre>
+                .uri(uriBuilder -&gt; uriBuilder.path(<span class="string"><span class="delimiter">&quot;</span><span class="content">/astros.json</span><span class="delimiter">&quot;</span></span>).build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(AstroResponse.class)
+                .block(<span class="predefined-type">Duration</span>.ofSeconds(<span class="integer">2</span>));</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>This method retrieves the JSON response and converts it to an instance of the <code>JokeResponse</code> class via the <code>bodyToMono</code> method. Rather than return a <code>JokeResponse</code>, however, the <code>map</code> method that follows converts the response into the <code>String</code> representing the actual joke and blocks a maximum of two seconds until the response is received.</p>
+<p>This method retrieves the JSON response and converts it to an instance of the <code>AstroResponse</code> class via the <code>bodyToMono</code> method, after blocking a maximum of two seconds until the response is received.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -612,14 +641,14 @@ It is not actually necessary to map all the included fields, but the response is
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In a reactive application, the return type would have been <code>Mono&lt;String&gt;</code> and the client would be responsible for waiting for a response to be received. In this case, the client is not aware that a reactive web client is being used to retrieve the response.
+In a reactive application, the return type would have been <code>Mono&lt;AstroResponse&gt;</code> and the client would be responsible for waiting for a response to be received. In this case, the client is not aware that a reactive web client is being used to retrieve the response.
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>To demonstrate how to use the service, create a JUnit 5 test for it. Create a class called <code>JokeServiceTest</code> in the <code>com.oreilly.services</code> package under the test hierarchy, <code>src/test/java</code>.</p>
+<p>To demonstrate how to use the service, create a JUnit 5 test for it. Create a class called <code>AstroServiceTest</code> in the <code>com.oreilly.services</code> package under the test hierarchy, <code>src/test/java</code>.</p>
 </li>
 <li>
 <p>The source for the test is:</p>
@@ -636,17 +665,18 @@ In a reactive application, the return type would have been <code>Mono&lt;String&
 
 <span class="annotation">@SpringBootTest</span>
 <span class="directive">public</span> <span class="type">class</span> <span class="class">JokeServiceTest</span> {
-    <span class="directive">private</span> <span class="predefined-type">Logger</span> logger = LoggerFactory.getLogger(JokeService.class);
+    <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">Logger</span> logger = LoggerFactory.getLogger(AstroService.class);
 
     <span class="annotation">@Autowired</span>
-    <span class="directive">private</span> JokeService service;
+    <span class="directive">private</span> AstroService service;
 
     <span class="annotation">@Test</span>
-    <span class="directive">public</span> <span class="type">void</span> getJoke() <span class="directive">throws</span> <span class="exception">Exception</span> {
-        <span class="predefined-type">String</span> joke = service.getJoke(<span class="string"><span class="delimiter">&quot;</span><span class="content">Craig</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Walls</span><span class="delimiter">&quot;</span></span>);
-        logger.info(joke);
-        assertTrue(joke.contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Craig</span><span class="delimiter">&quot;</span></span>) ||
-                   joke.contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Walls</span><span class="delimiter">&quot;</span></span>));
+    <span class="directive">public</span> <span class="type">void</span> getAstroResponse() {
+        AstroResponse response = service.getAstroResponse();
+        logger.info(response.toString());
+        assertTrue(response.getNumber() &gt;= <span class="integer">0</span>);
+        assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">success</span><span class="delimiter">&quot;</span></span>, response.getMessage());
+        assertEquals(response.getNumber(), response.getPeople().size());
     }
 
 }</code></pre>
@@ -655,9 +685,6 @@ In a reactive application, the return type would have been <code>Mono&lt;String&
 </li>
 <li>
 <p>Note the use of the SLF4J <code>Logger</code> class to log the jokes to the console. Not everything in Spring needs to be injected. Spring includes multiple loggers in the classpath. This example uses SLF4J.</p>
-</li>
-<li>
-<p>Feel free to change the name of the hero to anyone you prefer. (Craig Walls is the author of the <em>Spring in Action</em> book.)</p>
 </li>
 <li>
 <p>Execute the test and make any needed corrections until it passes.</p>
@@ -669,7 +696,7 @@ In a reactive application, the return type would have been <code>Mono&lt;String&
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-05-04 08:47:11 -0400
+Last updated 2022-10-26 10:39:33 -0400
 </div>
 </div>
 <style>
