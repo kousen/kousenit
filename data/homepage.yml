@@ -27,6 +27,9 @@ showcase:
     - icon: "twitter"
       URL: "https://twitter.com/kenkousen"
 
+    - icon: "mastodon"
+      URL: "https://mastodon.social/@kenkousen"
+
 # about
 about:
   enable: true
