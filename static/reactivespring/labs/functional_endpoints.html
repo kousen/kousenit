@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>Asynchronous Access</title>
+<title>Spring WebFlux with Functional Endpoints</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -442,97 +442,194 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_asynchronous_access">Asynchronous Access</a></li>
+<li><a href="#_spring_webflux_with_functional_endpoints">Spring WebFlux with Functional Endpoints</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_asynchronous_access">Asynchronous Access</h2>
+<h2 id="_spring_webflux_with_functional_endpoints">Spring WebFlux with Functional Endpoints</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>The <code>webflux</code> module in Spring allows you to use the Project Reactor types <code>Flux</code> and <code>Mono</code>. Methods that work synchronously can be converted to asynchronous by changing the return type to one of those types. The <code>WebClient</code> class then knows how produce those types, and is now the preferred asynchronous rest client (the class <code>AsyncRestTemplate</code> is now deprecated).</p>
-</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In the <code>AstroService</code> class, add an attribute of type <code>WebClient</code> that is initialize in the <code>AstroService</code> constructor using the <code>static</code> method <code>WebClient.create</code>, which takes the base URL of the service.</p>
+<p>Create an <code>OfficerHandler</code> class in the <code>controllers</code> package that is just a regular <code>@Component</code>, with methods that each take a <code>ServerRequest</code> and return a <code>Mono&lt;ServerResponse&gt;</code>:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Service</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">AstroService</span> {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.oreilly.reactiveofficers.controllers</span>;
 
-    <span class="directive">private</span> <span class="directive">final</span> RestTemplate template;
-    <span class="directive">private</span> <span class="directive">final</span> WebClient client;
+<span class="keyword">import</span> <span class="include">com.oreilly.reactiveofficers.dao.OfficerRepository</span>;
+<span class="keyword">import</span> <span class="include">com.oreilly.reactiveofficers.entities.Officer</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.http.HttpStatus</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.stereotype.Component</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.web.reactive.function.server.ServerRequest</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.web.reactive.function.server.ServerResponse</span>;
+<span class="keyword">import</span> <span class="include">reactor.core.publisher.Mono</span>;
 
-    <span class="annotation">@Autowired</span>
-    <span class="directive">public</span> AstroService(RestTemplateBuilder builder) {
-        <span class="local-variable">this</span>.template = builder.build();
-        <span class="local-variable">this</span>.client = WebClient.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">http://api.open-notify.org</span><span class="delimiter">&quot;</span></span>);
+<span class="keyword">import</span> <span class="include">static</span> <span class="include">org.springframework.http.MediaType.APPLICATION_JSON</span>;
+<span class="keyword">import</span> <span class="include">static</span> <span class="include">org.springframework.web.reactive.function.BodyInserters.fromObject</span>;
+
+<span class="annotation">@Component</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">OfficerHandler</span> {
+    <span class="directive">private</span> OfficerRepository repository;
+
+    <span class="directive">public</span> OfficerHandler(OfficerRepository repository) {
+        <span class="local-variable">this</span>.repository = repository;
     }
 
-    <span class="comment">// ... other methods ...</span>
+    <span class="directive">public</span> Mono&lt;ServerResponse&gt; listOfficers(ServerRequest request) {
+        <span class="keyword">return</span> ServerResponse.ok()
+                             .contentType(APPLICATION_JSON)
+                             .body(repository.findAll(), Officer.class);
+    }
+
+    <span class="directive">public</span> Mono&lt;ServerResponse&gt; createOfficer(ServerRequest request) {
+        Mono&lt;Officer&gt; officerMono = request.bodyToMono(Officer.class);
+        <span class="keyword">return</span> officerMono.flatMap(officer -&gt;
+                                           ServerResponse.status(HttpStatus.CREATED)
+                                                         .contentType(APPLICATION_JSON)
+                                                         .body(repository.save(officer), Officer.class));
+    }
+
+    <span class="directive">public</span> Mono&lt;ServerResponse&gt; getOfficer(ServerRequest request) {
+        <span class="predefined-type">String</span> id = request.pathVariable(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>);
+        Mono&lt;ServerResponse&gt; notFound = ServerResponse.notFound().build();
+        Mono&lt;Officer&gt; personMono = <span class="local-variable">this</span>.repository.findById(id);
+        <span class="keyword">return</span> personMono
+                .flatMap(person -&gt; ServerResponse.ok()
+                                                 .contentType(APPLICATION_JSON)
+                                                 .body(fromObject(person)))
+                .switchIfEmpty(notFound);
+    }
 }</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Now add a new method called <code>getAstroResponseAsync</code> that takes no arguments and returns a <code>Mono&lt;AstroResponse&gt;</code> instead of the <code>AstroReponse</code> we used previously. The implementation is:</p>
+<p>Make a class called <code>RouterConfig</code> in the <code>com.oreilly.reactiveofficers.configuration</code> package. Annotate it with <code>@Configuration</code> and add a bean to return a <code>RouterFunction&lt;ServerResponse&gt;</code>:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> Mono&lt;AstroResponse&gt; getAstroResponseAsync() {
-    <span class="keyword">return</span> client.get()
-            .uri(<span class="string"><span class="delimiter">&quot;</span><span class="content">/astros.json</span><span class="delimiter">&quot;</span></span>)
-            .accept(MediaType.APPLICATION_JSON)
-            .retrieve()
-            .bodyToMono(AstroResponse.class)
-            .log();
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.oreilly.reactiveofficers.configuration</span>;
+
+<span class="keyword">import</span> <span class="include">com.oreilly.reactiveofficers.controllers.OfficerHandler</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.context.annotation.Bean</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.context.annotation.Configuration</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.web.reactive.function.server.RouterFunction</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.web.reactive.function.server.RouterFunctions</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.web.reactive.function.server.ServerResponse</span>;
+
+<span class="keyword">import</span> <span class="include">static</span> <span class="include">org.springframework.http.MediaType.APPLICATION_JSON</span>;
+<span class="keyword">import</span> <span class="include">static</span> <span class="include">org.springframework.web.reactive.function.server.RequestPredicates</span>.*;
+
+<span class="annotation">@Configuration</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">RouterConfig</span> {
+    <span class="annotation">@Bean</span>
+    <span class="directive">public</span> RouterFunction&lt;ServerResponse&gt; route(OfficerHandler handler) {
+        <span class="keyword">return</span> RouterFunctions
+                .route(GET(<span class="string"><span class="delimiter">&quot;</span><span class="content">/route/{id}</span><span class="delimiter">&quot;</span></span>).and(accept(APPLICATION_JSON)),
+                       handler::getOfficer)
+                .andRoute(GET(<span class="string"><span class="delimiter">&quot;</span><span class="content">/route</span><span class="delimiter">&quot;</span></span>).and(accept(APPLICATION_JSON)),
+                          handler::listOfficers)
+                .andRoute(POST(<span class="string"><span class="delimiter">&quot;</span><span class="content">/route</span><span class="delimiter">&quot;</span></span>).and(contentType(APPLICATION_JSON)),
+                          handler::createOfficer);
+    }
 }</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>The <code>get</code> method is used to make an HTTP GET request. the <code>uri</code> method takes the path, which is the part of the URL after the base. The <code>retrieve</code> method schedules the retrieval. Then the <code>bodyToMono</code> method extracts the body from the HTTP response and converts it to an instance of <code>AstroResponse</code> and wraps it in a <code>Mono</code>. Finally, the <code>log</code> method on <code>Mono</code> will log to the console all the reactive stream interactions, which is useful for debugging.</p>
-</li>
-<li>
-<p>To test this, go back to the <code>AstroServiceTest</code> class. There are two ways to test the method. One is to invoke it and block until the request is complete. A test to do that is shown here:</p>
+<p>Add a test for the router function and handler:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="type">void</span> getAstroResponseAsync() {
-    AstroResponse response = service.getAstroResponseAsync()
-            .block(<span class="predefined-type">Duration</span>.ofSeconds(<span class="integer">2</span>));
-    assertNotNull(response);
-    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">success</span><span class="delimiter">&quot;</span></span>, response.getMessage());
-    assertTrue(response.getNumber() &gt;= <span class="integer">0</span>);
-    assertEquals(response.getNumber(), response.getPeople().size());
-    <span class="predefined-type">System</span>.out.println(response);
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.oreilly.reactiveofficers.controllers</span>;
+
+<span class="keyword">import</span> <span class="include">com.oreilly.reactiveofficers.dao.OfficerRepository</span>;
+<span class="keyword">import</span> <span class="include">com.oreilly.reactiveofficers.entities.Officer</span>;
+<span class="keyword">import</span> <span class="include">com.oreilly.reactiveofficers.entities.Rank</span>;
+<span class="keyword">import</span> <span class="include">org.assertj.core.api.Assertions</span>;
+<span class="keyword">import</span> <span class="include">org.junit.jupiter.api.Before</span>;
+<span class="keyword">import</span> <span class="include">org.junit.jupiter.api.Test</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.beans.factory.annotation.Autowired</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.boot.test.context.SpringBootTest</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.http.MediaType</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.test.context.junit4.SpringRunner</span>;
+<span class="keyword">import</span> <span class="include">org.springframework.test.web.reactive.server.WebTestClient</span>;
+<span class="keyword">import</span> <span class="include">reactor.core.publisher.Flux</span>;
+<span class="keyword">import</span> <span class="include">reactor.core.publisher.Mono</span>;
+
+<span class="keyword">import</span> <span class="include">java.util.Arrays</span>;
+<span class="keyword">import</span> <span class="include">java.util.List</span>;
+
+<span class="annotation">@SpringBootTest</span>(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">OfficerHandlerAndRouterTests</span> {
+    <span class="annotation">@Autowired</span>
+    <span class="directive">private</span> WebTestClient client;
+
+    <span class="annotation">@Autowired</span>
+    <span class="directive">private</span> OfficerRepository repository;
+
+    <span class="directive">private</span> <span class="predefined-type">List</span>&lt;Officer&gt; officers = <span class="predefined-type">Arrays</span>.asList(
+            <span class="keyword">new</span> Officer(Rank.CAPTAIN, <span class="string"><span class="delimiter">&quot;</span><span class="content">James</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Kirk</span><span class="delimiter">&quot;</span></span>),
+            <span class="keyword">new</span> Officer(Rank.CAPTAIN, <span class="string"><span class="delimiter">&quot;</span><span class="content">Jean-Luc</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Picard</span><span class="delimiter">&quot;</span></span>),
+            <span class="keyword">new</span> Officer(Rank.CAPTAIN, <span class="string"><span class="delimiter">&quot;</span><span class="content">Benjamin</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Sisko</span><span class="delimiter">&quot;</span></span>),
+            <span class="keyword">new</span> Officer(Rank.CAPTAIN, <span class="string"><span class="delimiter">&quot;</span><span class="content">Kathryn</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Janeway</span><span class="delimiter">&quot;</span></span>),
+            <span class="keyword">new</span> Officer(Rank.CAPTAIN, <span class="string"><span class="delimiter">&quot;</span><span class="content">Jonathan</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Archer</span><span class="delimiter">&quot;</span></span>));
+
+    <span class="annotation">@BeforeEach</span>
+    <span class="directive">public</span> <span class="type">void</span> setUp() {
+        repository.deleteAll()
+                  .thenMany(Flux.fromIterable(officers))
+                  .flatMap(repository::save)
+                  .doOnNext(<span class="predefined-type">System</span>.out::println)
+                  .then()
+                  .block();
+    }
+
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> testCreateOfficer() {
+        Officer officer = <span class="keyword">new</span> Officer(Rank.LIEUTENANT, <span class="string"><span class="delimiter">&quot;</span><span class="content">Hikaru</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Sulu</span><span class="delimiter">&quot;</span></span>);
+        client.post().uri(<span class="string"><span class="delimiter">&quot;</span><span class="content">/route</span><span class="delimiter">&quot;</span></span>)
+              .contentType(MediaType.APPLICATION_JSON)
+              .accept(MediaType.APPLICATION_JSON)
+              .body(Mono.just(officer), Officer.class)
+              .exchange()
+              .expectStatus().isCreated()
+              .expectHeader().contentType(MediaType.APPLICATION_JSON)
+              .expectBody()
+              .jsonPath(<span class="string"><span class="delimiter">&quot;</span><span class="content">$.id</span><span class="delimiter">&quot;</span></span>).isNotEmpty()
+              .jsonPath(<span class="string"><span class="delimiter">&quot;</span><span class="content">$.first</span><span class="delimiter">&quot;</span></span>).isEqualTo(<span class="string"><span class="delimiter">&quot;</span><span class="content">Hikaru</span><span class="delimiter">&quot;</span></span>)
+              .jsonPath(<span class="string"><span class="delimiter">&quot;</span><span class="content">$.last</span><span class="delimiter">&quot;</span></span>).isEqualTo(<span class="string"><span class="delimiter">&quot;</span><span class="content">Sulu</span><span class="delimiter">&quot;</span></span>);
+    }
+
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> testGetAllOfficers() {
+        client.get().uri(<span class="string"><span class="delimiter">&quot;</span><span class="content">/route</span><span class="delimiter">&quot;</span></span>)
+              .accept(MediaType.APPLICATION_JSON)
+              .exchange()
+              .expectStatus().isOk()
+              .expectHeader().contentType(MediaType.APPLICATION_JSON)
+              .expectBodyList(Officer.class);
+    }
+
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> testGetSingleOfficer() {
+        Officer officer = repository.save(<span class="keyword">new</span> Officer(Rank.ENSIGN, <span class="string"><span class="delimiter">&quot;</span><span class="content">Wesley</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Crusher</span><span class="delimiter">&quot;</span></span>)).block();
+
+        client.get()
+              <span class="comment">//.uri(&quot;/route/{id}&quot;, Collections.singletonMap(&quot;id&quot;, officer.getId()))</span>
+              .uri(<span class="string"><span class="delimiter">&quot;</span><span class="content">/route/{id}</span><span class="delimiter">&quot;</span></span>, officer.getId())
+              .exchange()
+              .expectStatus().isOk()
+              .expectBody()
+              .consumeWith(response -&gt;
+                                   Assertions.assertThat(response.getResponseBody()).isNotNull());
+    }
 }</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>As an alternative, the Reactor Test project includes a class called <code>StepVerifier</code>, which includes assertion methods. A test using that class is given by:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="type">void</span> getAstroResponseAsyncStepVerifier() {
-    service.getAstroResponseAsync()
-            .as(StepVerifier::create)
-            .assertNext(response -&gt; {
-                assertNotNull(response);
-                assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">success</span><span class="delimiter">&quot;</span></span>, response.message());
-                assertTrue(response.number() &gt;= <span class="integer">0</span>);
-                assertEquals(response.number(), response.people().size());
-                <span class="predefined-type">System</span>.out.println(response);
-            })
-            .verifyComplete();
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Both of the new tests should now pass. The details of the <code>StepVerifier</code> class will be discussed during the course.</p>
+<p>The tests should all now pass.</p>
 </li>
 </ol>
 </div>
@@ -541,7 +638,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-27 12:34:18 -0500
+Last updated 2023-02-28 10:48:09 -0500
 </div>
 </div>
 <style>
