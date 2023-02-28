@@ -1015,7 +1015,7 @@ Add the <code>.log()</code> method to any reactive stream to see the underlying 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Initialize a collection with sample data using a <code>CommandLineRunner</code> from Spring. To do so, create a class called <code>CustomerInit</code> in the <code>com.kousen.reactiveofficers</code> package, which implements the <code>CommandLineRunner</code> interface.</p>
+<p>Initialize a collection with sample data using a <code>CommandLineRunner</code> from Spring. To do so, create a class called <code>AppInit</code> in the <code>com.kousen.reactiveofficers.config</code> package. We could use a <code>@Component</code> class for this, but let&#8217;s use the Java configuration approach instead, since it&#8217;s a useful technique to know.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1028,9 +1028,6 @@ If the database was not being reset every time the application starts, this step
 </tr>
 </table>
 </div>
-</li>
-<li>
-<p>We could use a <code>@Component</code> class for this, but let&#8217;s use the Java configuration approach instead, since it&#8217;s a useful technique to know. Create a class called <code>AppInit</code> in a package called <code>config</code> under the root.</p>
 </li>
 <li>
 <p>Annotate the class with <code>@Configuration</code>, marking it as a Java configuration class that will be read on start up.</p>
@@ -1168,7 +1165,7 @@ If the database was not being reset every time the application starts, this step
         .expectStatus().isOk()
         .expectBody(Customer.class)
         .value(customer -&gt; assertEquals(id, customer.id())));
-    }</code></pre>
+}</code></pre>
 </div>
 </div>
 </li>
@@ -1186,7 +1183,7 @@ If the database was not being reset every time the application starts, this step
         .expectStatus().isCreated()
         .expectBody(Customer.class)
         .value(c -&gt; assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Inara</span><span class="delimiter">&quot;</span></span>, c.firstName()));
-    }</code></pre>
+}</code></pre>
 </div>
 </div>
 </li>
@@ -1208,8 +1205,8 @@ If the database was not being reset every time the application starts, this step
     client.delete()
         .uri(<span class="string"><span class="delimiter">&quot;</span><span class="content">/customers/999</span><span class="delimiter">&quot;</span></span>)
         .exchange()
-        .expectStatus().isBadRequest();
-    }</code></pre>
+        .expectStatus().isNotFound();
+}</code></pre>
 </div>
 </div>
 </li>
@@ -1236,7 +1233,8 @@ If the database was not being reset every time the application starts, this step
         <span class="local-variable">this</span>.repository = repository;
     }
 
-<span class="comment">// ... more to come ...</span></code></pre>
+<span class="comment">// ... more to come ...</span>
+}</code></pre>
 </div>
 </div>
 </li>
@@ -1284,7 +1282,7 @@ If the database was not being reset every time the application starts, this step
 <span class="directive">public</span> <span class="type">class</span> <span class="class">CustomerAdvice</span> {
 
     <span class="annotation">@ExceptionHandler</span>(<span class="exception">IllegalArgumentException</span>.class)
-    <span class="annotation">@ResponseStatus</span>(HttpStatus.BAD_REQUEST)
+    <span class="annotation">@ResponseStatus</span>(HttpStatus.NOT_FOUND)
     <span class="directive">public</span> <span class="predefined-type">String</span> handleIllegalArgumentException(<span class="exception">IllegalArgumentException</span> e) {
         <span class="keyword">return</span> e.getMessage();
     }
@@ -1293,7 +1291,7 @@ If the database was not being reset every time the application starts, this step
 </div>
 </li>
 <li>
-<p>This will convert any <code>IllegalArgumentException</code> into a <code>BAD_REQUEST</code>. Spring Boot 3 also contains an interesting class called <code>ProblemDetails</code> that can be used as an alternative to give back more information. If there is time, this will be discussed during class.</p>
+<p>This will convert any <code>IllegalArgumentException</code> into a <code>NOT_FOUND</code>. Spring Boot 3 also contains an interesting class called <code>ProblemDetails</code> that can be used as an alternative to give back more information. If there is time, this will be discussed during class.</p>
 </li>
 </ol>
 </div>
