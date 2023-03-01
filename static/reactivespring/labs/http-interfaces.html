@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>Building a REST client</title>
+<title>Http Interfaces (Spring Boot 3+ only)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -442,201 +442,78 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_building_a_rest_client">Building a REST client</a></li>
+<li><a href="#_http_interfaces_spring_boot_3_only">Http Interfaces (Spring Boot 3+ only)</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_building_a_rest_client">Building a REST client</h2>
+<h2 id="_http_interfaces_spring_boot_3_only">Http Interfaces (Spring Boot 3+ only)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This exercise uses the <code>RestTemplate</code> class to synchronously access a RESTful web service. The template is used to convert the response into an object for the rest of the system. Later the <code>WebClient</code> class, introduced in Spring 5, will be used to do the same asynchronously.</p>
+<p>If you are using Spring Boot 3.0 or above (and therefore Spring 6.0 or above), there is a new way to access external restful web services. The <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#spring-integration(Spring" class="bare">https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#spring-integration(Spring</a> 6 documentation) has a section on REST clients, which includes the <code>RestTemplate</code> and <code>WebClient</code> classes discussed above, as well as something called HTTP Interface.</p>
+</div>
+<div class="paragraph">
+<p>The idea is to declare an interface with the access methods you want, and add a proxy factory bean to the application context, and Spring will implement the interface methods for you. This exercise is a quick example of how to do that for our current application.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create a new Spring Boot project (either by using the Initializr at <a href="http://start.spring.io" class="bare">http://start.spring.io</a> or using your IDE) called <code>restclient</code>. Add both the <em>Spring Web</em> and the <em>Spring Reactive Web</em> dependencies.</p>
+<p>Add an interface called <code>AstroInterface</code> to the <code>services</code> package.</p>
 </li>
 <li>
-<p>Create a service class called <code>AstroService</code> in a <code>com.nfjs.restclient.services</code> package under <code>src/main/java</code></p>
-</li>
-<li>
-<p>Add the annotation <code>@Service</code> to the class (from the <code>org.springframework.stereotype</code> package, so you&#8217;ll need an <code>import</code> statement)</p>
-</li>
-<li>
-<p>Add a private attribute to <code>AstroService</code> of type <code>RestTemplate</code> called <code>template</code></p>
-</li>
-<li>
-<p>Add a constructor to <code>AstroService</code> that takes a single argument of type <code>RestTemplateBuilder</code>.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Because there are so many possible configuration options, Spring does not automatically provide a <code>RestTemplate</code>. It does, however, provide a <code>RestTemplateBuilder</code>, which can be used to configure and create the <code>RestTemplate</code>.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Inside the constructor, invoke the <code>build()</code> method on the <code>RestTemplateBuilder</code> and assign the result to the <code>template</code> attribute.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you provide only a single constructor in a class, you do not need to add the <code>@Autowired</code> annotation to it. Spring will inject the arguments anyway
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>The site providing the API is <a href="http://open-notify.org/" class="bare">http://open-notify.org/</a>, which is an API based on NASA data. We&#8217;ll access the <em>Number of People in Space</em> service using a GET request.</p>
-</li>
-<li>
-<p>Add a <code>public</code> method to our service called <code>getPeopleInSpace</code> that takes no arguments and returns a <code>String</code>.</p>
-</li>
-<li>
-<p>Access the API using the <code>getForObject</code> method of <code>RestTemplate</code> as shown:</p>
+<p>Inside that interface, add a method to perform an HTTP GET request to our "People In Space" endpoint:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="predefined-type">String</span> getPeopleInSpace() {
-    <span class="keyword">return</span> template.getForObject(<span class="string"><span class="delimiter">&quot;</span><span class="content">http://api.open-notify.org/astros.json</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">String</span>.class);
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">AstroInterface</span> {
+    <span class="annotation">@GetExchange</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">/astros.json</span><span class="delimiter">&quot;</span></span>)
+    Mono&lt;AstroResponse&gt; getAstroResponse();
 }</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>The <code>getForObject</code> method that takes two arguments: the URL to access, and the class to instantiate with the resulting JSON response. It performs an HTTP GET request and parses the returned JSON data. At the moment, all we are asking is for the JSON data to be returned as a <code>String</code> in order to verify everything is working properly. To do so, add a test class called <code>AstroServiceTest</code> in the same package under <code>src/test/java</code>:</p>
+<p>Like most publicly available services, this service only supports GET requests. For those that support other HTTP methods, there are annotations <code>@PutExchange</code>, <code>@PostExchange</code>, <code>@DeleteExchange</code>, and so on. Also, this particular request does not take any parameters, so it is particularly simple. If it took parameters, they would appear in the URL at Http Template variables, and in the parameter list of the method annotated with <code>@PathVariable</code> or something similar.</p>
+</li>
+<li>
+<p>We now need the proxy factory bean, which goes in a Java configuration class. Since the <code>RestClientApplication</code> class (the class with the standard Java <code>main</code> method) is annotated with <code>@SpringBootApplication</code>, it ultimately contains the annotation <code>@Configuration</code>. That means we can add <code>@Bean</code> methods to it, which Spring will use to add beans to the application context. Therefore, add the following bean to that class:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SpringBootTest</span>
-<span class="type">class</span> <span class="class">AstroServiceTest</span> {
-    <span class="annotation">@Autowired</span>
-    <span class="directive">private</span> AstroService service;
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Bean</span>
+<span class="directive">public</span> AstroInterface astroInterface() {
+    WebClient client = WebClient.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">http://api.open-notify.org/</span><span class="delimiter">&quot;</span></span>);
+    HttpServiceProxyFactory factory =
+                HttpServiceProxyFactory.builder(WebClientAdapter.forClient(client)).build();
 
-    <span class="annotation">@Test</span>
-    <span class="type">void</span> getPeopleInSpace() {
-        <span class="predefined-type">String</span> people = service.getPeopleInSpace();
-        assertNotNull(people);
-        assertTrue(people.contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">people</span><span class="delimiter">&quot;</span></span>));
-        <span class="predefined-type">System</span>.out.println(people);
-    }
+    <span class="keyword">return</span> factory.createClient(AstroInterface.class);
 }</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>The test asserts that the JSON response contains a field called "people", but that&#8217;s about all we can do until we parse the data into Java classes. The general form of the response is:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">message</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">success</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">number</span><span class="delimiter">&quot;</span></span>: NUMBER_OF_PEOPLE_IN_SPACE,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">people</span><span class="delimiter">&quot;</span></span>: [
-    {<span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: NAME, <span class="key"><span class="delimiter">&quot;</span><span class="content">craft</span><span class="delimiter">&quot;</span></span>: SPACECRAFT_NAME},
-    ...
-  ]
-}</code></pre>
-</div>
-</div>
+<p>That method creates a <code>WebClient</code> configured for the base URL, and uses that to build an <code>HttpServiceProxyFactory</code>. From the factory, we use the <code>createClient</code> method to tell Spring to create a class that implements the <code>AstroInterface</code>.</p>
 </li>
 <li>
-<p>Since there are only two nested JSON objects, you can create two classes that model them. Create the classes <code>Assignment</code>, which will be the combination of "name" and "craft" for each astronaut, and <code>AstroResponse</code>, which holds the complete response, both in the
-<code>com.nfjs.restclient.json</code> package.</p>
-</li>
-<li>
-<p>The code for the classes are shown below. Note how the properties match the keys in the JSON response exactly. You can use annotations from the included Jackson 2 JSON parser to customize the attributes if you like, but in this case it&#8217;s easy enough to make them the same as the JSON variable names.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.nfjs.restclient.json</span>;
-
-<span class="directive">public</span> <span class="type">class</span> <span class="class">Assignment</span> {
-    <span class="directive">private</span> <span class="predefined-type">String</span> name;
-    <span class="directive">private</span> <span class="predefined-type">String</span> craft;
-
-    <span class="directive">public</span> <span class="predefined-type">String</span> getName() {
-        <span class="keyword">return</span> name;
-    }
-
-    <span class="directive">public</span> <span class="type">void</span> setName(<span class="predefined-type">String</span> name) {
-        <span class="local-variable">this</span>.name = name;
-    }
-
-    <span class="directive">public</span> <span class="predefined-type">String</span> getCraft() {
-        <span class="keyword">return</span> craft;
-    }
-
-    <span class="directive">public</span> <span class="type">void</span> setCraft(<span class="predefined-type">String</span> craft) {
-        <span class="local-variable">this</span>.craft = craft;
-    }
-}
-
-<span class="directive">public</span> <span class="type">class</span> <span class="class">AstroResponse</span> {
-    <span class="directive">private</span> <span class="predefined-type">String</span> message;
-    <span class="directive">private</span> <span class="type">int</span> number;
-    <span class="directive">private</span> <span class="predefined-type">List</span>&lt;Assignment&gt; people;
-
-    <span class="comment">// ... getters and setters ...</span>
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Note that if you are using Java 17, you can replace these with records instead, because the included Jackson JSON parser understands how to parse JSON into records (in two separate files in the <code>com.nfjs.restclient.json</code> package):</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> record Assignment(<span class="predefined-type">String</span> name, <span class="predefined-type">String</span> craft) {
-}
-
-<span class="directive">public</span> record AstroResponse(<span class="predefined-type">String</span> message, <span class="type">int</span> number, <span class="predefined-type">List</span>&lt;Assignment&gt; people) {
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>The JSON response from the web service can now be converted into an instance of the <code>AstroResponse</code> class. Add a method called <code>getAstroResponseSync</code> to the <code>AstroService</code> that takes no arguments and returns an <code>AstroResponse</code>:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> AstroResponse getAstroResponseSync() {
-    <span class="keyword">return</span> template.getForObject(
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">http://api.open-notify.org/astros.json</span><span class="delimiter">&quot;</span></span>,
-        AstroResponse.class);
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>To use the new method, create a test for it. The source for the test is:</p>
+<p>To test this, simply reuse the <code>AstroServiceTest</code> class by adding another test:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="type">void</span> getAstroResponseSync() {
-    AstroResponse response = service.getAstroResponseSync();
+<span class="type">void</span> getAstroResponseFromInterface(<span class="annotation">@Autowired</span> AstroInterface astroInterface) {
+    AstroResponse response = astroInterface.getAstroResponse()
+            .block(<span class="predefined-type">Duration</span>.ofSeconds(<span class="integer">2</span>));
     assertNotNull(response);
-    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">success</span><span class="delimiter">&quot;</span></span>, response.getMessage());
-    assertTrue(response.getNumber() &gt;= <span class="integer">0</span>);
-    assertEquals(response.getNumber(), response.getPeople().size());
+    assertAll(
+            () -&gt; assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">success</span><span class="delimiter">&quot;</span></span>, response.message()),
+            () -&gt; assertTrue(response.number() &gt;= <span class="integer">0</span>),
+            () -&gt; assertEquals(response.number(), response.people().size())
+    );
     <span class="predefined-type">System</span>.out.println(response);
 }</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Note that if you used records for the parsed data, replace <code>getMessage()</code> with <code>message()</code>, <code>getNumber()</code> with <code>number()</code>, and <code>getPeople()</code> with <code>people()</code>.</p>
-</li>
-<li>
-<p>The test verifies that the returned message string is "success", that the number of people in space is non-negative, and that the reported number matches the size of the people collection.</p>
-</li>
-<li>
-<p>Execute the test and make any needed corrections until it passes.</p>
+<p>That test should pass. Note that for synchronous access, simply change the return type of the method inside the <code>getAstroResponse</code> method of <code>AstroInterface</code> to <code>AstroResponse</code> instead of the <code>Mono</code>. See the documentation for additional details.</p>
 </li>
 </ol>
 </div>
@@ -645,7 +522,7 @@ If you provide only a single constructor in a class, you do not need to add the 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-03-01 15:25:41 -0500
+Last updated 2023-03-01 15:26:07 -0500
 </div>
 </div>
 <style>
