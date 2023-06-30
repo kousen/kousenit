@@ -18,6 +18,9 @@ showcase:
     URL: "#contact"
 
   socialLinks:
+    - icon: "youtube"
+      URL: "https://youtube.com/@kenkousen?sub_confirmation=1"
+
     - icon: "linkedin"
       URL: "https://www.linkedin.com/in/kenkousen/"
 
@@ -37,8 +40,8 @@ about:
   content: '<p class="lead">
     Welcome to Kousen IT, Inc! Kousen IT is run by Ken Kousen, a Java Champion and the author of the books 
     <em>Making Java Groovy</em>, <em>Modern Java Recipes</em>, <em>Gradle Recipes for Android</em>, <em>Kotlin
-    Cookbook</em>, and <em>Help Your Boss Help You</em>. My latest book, <em>Mockito
-    Made Clear</em>, is in beta at Pragmatic Programmers.
+    Cookbook</em>, <em>Help Your Boss Help You</em>, and <em>Mockito
+    Made Clear</em>.
     </p>
     <p class="lead">
     I have been a regular speaker on the 
