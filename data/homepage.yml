@@ -31,7 +31,7 @@ showcase:
       URL: "https://twitter.com/kenkousen"
 
     - icon: "mastodon"
-      URL: "https://mastodon.social/@kenkousen"
+      URL: "https://foojay.social/@kenkousen"
 
 # about
 about:
@@ -55,7 +55,7 @@ about:
     <a target="_blank" href="https://nofluffjuststuff.com/groovypodcast">Groovy Podcast</a>.
     </p>
     <p>
-    <a rel="me" href="https://mastodon.social/@kenkousen">My profile on Mastodon</a>
+    <a rel="me" href="https://foojay.social/@kenkousen">My profile on Mastodon</a>
     </p>'
   button:
     icon: "icon-smile-fill"
