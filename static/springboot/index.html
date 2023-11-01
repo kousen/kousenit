@@ -444,7 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Ken Kousen</span><br>
 <span id="email" class="email"><a href="mailto:ken.kousen@kousenit.com">ken.kousen@kousenit.com</a></span><br>
-<span id="revdate">2022-05-03</span>
+<span id="revdate">2023-11-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -454,10 +454,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_creating_a_new_project">1. Creating a New Project</a></li>
 <li><a href="#_add_a_rest_controller">2. Add a Rest Controller</a></li>
 <li><a href="#_building_a_rest_client">3. Building a REST client</a></li>
-<li><a href="#_accessing_the_google_geocoder">4. Accessing the Google Geocoder</a></li>
-<li><a href="#_using_the_jdbc_template">5. Using the JDBC template</a></li>
-<li><a href="#_implementing_the_crud_layer_using_jpa">6. Implementing the CRUD layer using JPA</a></li>
-<li><a href="#_using_spring_data">7. Using Spring Data</a></li>
+<li><a href="#_http_interfaces_spring_boot_3_only">4. Http Interfaces (Spring Boot 3+ only)</a></li>
+<li><a href="#_accessing_the_google_geocoder">5. Accessing the Google Geocoder</a></li>
+<li><a href="#_using_the_jdbc_template">6. Using the JDBC template</a></li>
+<li><a href="#_implementing_the_crud_layer_using_jpa">7. Implementing the CRUD layer using JPA</a></li>
+<li><a href="#_using_spring_data">8. Using Spring Data</a></li>
 </ul>
 </li>
 </ul>
@@ -1156,7 +1157,79 @@ In a reactive application, the return type would have been <code>Mono&lt;AstroRe
 </div>
 </div>
 <div class="sect1">
-<h2 id="_accessing_the_google_geocoder">4. Accessing the Google Geocoder</h2>
+<h2 id="_http_interfaces_spring_boot_3_only">4. Http Interfaces (Spring Boot 3+ only)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you are using Spring Boot 3.0 or above (and therefore Spring 6.0 or above), there is a new way to access external restful web services. The <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#spring-integration(Spring" class="bare">https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#spring-integration(Spring</a> 6 documentation) has a section on REST clients, which includes the <code>RestTemplate</code> and <code>WebClient</code> classes discussed above, as well as something called HTTP Interface.</p>
+</div>
+<div class="paragraph">
+<p>The idea is to declare an interface with the access methods you want, and add a proxy factory bean to the application context, and Spring will implement the interface methods for you. This exercise is a quick example of how to do that for our current application.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add an interface called <code>AstroInterface</code> to the <code>services</code> package.</p>
+</li>
+<li>
+<p>Inside that interface, add a method to perform an HTTP GET request to our "People In Space" endpoint:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">AstroInterface</span> {
+    <span class="annotation">@GetExchange</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">/astros.json</span><span class="delimiter">&quot;</span></span>)
+    Mono&lt;AstroResponse&gt; getAstroResponse();
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Like most publicly available services, this service only supports GET requests. For those that support other HTTP methods, there are annotations <code>@PutExchange</code>, <code>@PostExchange</code>, <code>@DeleteExchange</code>, and so on. Also, this particular request does not take any parameters, so it is particularly simple. If it took parameters, they would appear in the URL at Http Template variables, and in the parameter list of the method annotated with <code>@PathVariable</code> or something similar.</p>
+</li>
+<li>
+<p>We now need the proxy factory bean, which goes in a Java configuration class. Since the <code>RestClientApplication</code> class (the class with the standard Java <code>main</code> method) is annotated with <code>@SpringBootApplication</code>, it ultimately contains the annotation <code>@Configuration</code>. That means we can add <code>@Bean</code> methods to it, which Spring will use to add beans to the application context. Therefore, add the following bean to that class:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Bean</span>
+<span class="directive">public</span> AstroInterface astroInterface() {
+    WebClient client = WebClient.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">http://api.open-notify.org/</span><span class="delimiter">&quot;</span></span>);
+    HttpServiceProxyFactory factory =
+                HttpServiceProxyFactory.builder(WebClientAdapter.forClient(client)).build();
+
+    <span class="keyword">return</span> factory.createClient(AstroInterface.class);
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>That method creates a <code>WebClient</code> configured for the base URL, and uses that to build an <code>HttpServiceProxyFactory</code>. From the factory, we use the <code>createClient</code> method to tell Spring to create a class that implements the <code>AstroInterface</code>.</p>
+</li>
+<li>
+<p>To test this, simply reuse the <code>AstroServiceTest</code> class by adding another test:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
+<span class="type">void</span> getAstroResponseFromInterface(<span class="annotation">@Autowired</span> AstroInterface astroInterface) {
+    AstroResponse response = astroInterface.getAstroResponse()
+            .block(<span class="predefined-type">Duration</span>.ofSeconds(<span class="integer">2</span>));
+    assertNotNull(response);
+    assertAll(
+            () -&gt; assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">success</span><span class="delimiter">&quot;</span></span>, response.message()),
+            () -&gt; assertTrue(response.number() &gt;= <span class="integer">0</span>),
+            () -&gt; assertEquals(response.number(), response.people().size())
+    );
+    <span class="predefined-type">System</span>.out.println(response);
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>That test should pass. Note that for synchronous access, simply change the return type of the method inside the <code>getAstroResponse</code> method of <code>AstroInterface</code> to <code>AstroResponse</code> instead of the <code>Mono</code>. See the documentation for additional details.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_accessing_the_google_geocoder">5. Accessing the Google Geocoder</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Google provides a free geocoding web service that converts addresses into geographical coordinates.</p>
@@ -1623,7 +1696,7 @@ The address components can be anything appropriate to the host country. The URL 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_using_the_jdbc_template">5. Using the JDBC template</h2>
+<h2 id="_using_the_jdbc_template">6. Using the JDBC template</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Spring provides a class called <code>JdbcTemplate</code> in the <code>org.springframework.jdbc.core</code> package. All it needs in order to work is a data source. It removes almost all the boilerplate code normally associated with JDBC. In this exercise, you&#8217;ll use the <code>JdbcTemplate</code> to implement the standard CRUD (create, read, update, delete) methods on an entity.</p>
@@ -2060,7 +2133,7 @@ The address components can be anything appropriate to the host country. The URL 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_implementing_the_crud_layer_using_jpa">6. Implementing the CRUD layer using JPA</h2>
+<h2 id="_implementing_the_crud_layer_using_jpa">7. Implementing the CRUD layer using JPA</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Java Persistence API (JPA) is a layer over the so-called persistence providers, the most common of which is Hibernate. With regular Spring, configuring JPA requires several beans, including an entity manger factory and a JPA vendor adapter. Fortunately, in Spring Boot, the presence of the JPA dependency causes the framework to implement all of that for you.</p>
@@ -2262,7 +2335,7 @@ The address components can be anything appropriate to the host country. The URL 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_using_spring_data">7. Using Spring Data</h2>
+<h2 id="_using_spring_data">8. Using Spring Data</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Spring Data JPA project makes it incredibly easy to implement a DAO layer. You extend the proper interface, and the underlying infrastructure generates all the implementations for you.</p>
@@ -2356,7 +2429,7 @@ implementation <span class="string"><span class="delimiter">'</span><span class=
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-05-03 18:15:56 -0400
+Last updated 2023-11-01 07:49:56 -0400
 </div>
 </div>
 <style>
