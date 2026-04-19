@@ -10,3 +10,4 @@ package-lock.json
 .idea
 .idea/workspace.xml
 public/
+.hugo_build.lock
