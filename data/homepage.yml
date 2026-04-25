@@ -105,8 +105,8 @@ books:
         btnText: "Pragmatic Programmers"
         URL: "https://pragprog.com/titles/mockito/mockito-made-clear/"
       image:
-        x: "img/books/mmc_cover_pragprog.jpeg"
-        _2x: "img/books/mmc_cover_pragprog.jpeg"
+        x: "img/books/mmc_cute.jpeg"
+        _2x: "img/books/mmc_cute@2x.jpeg"
       is_even: false
 
     - title: "Help Your Boss Help You"
@@ -117,8 +117,8 @@ books:
         btnText: "Pragmatic Programmers"
         URL: "https://www.amazon.com/Help-Your-Boss-You-Opportunities/dp/1680508229/"
       image:
-        x: "img/books/hybhy_cover_amazon.jpeg"
-        _2x: "img/books/hybhy_cover_amazon.jpeg"
+        x: "img/books/hybhy_cute.jpeg"
+        _2x: "img/books/hybhy_cute@2x.jpeg"
       is_even: true
 
 
@@ -130,8 +130,8 @@ books:
         btnText: "Amazon"
         URL: "https://www.amazon.com/Kotlin-Cookbook-Problem-Focused-Ken-Kousen/dp/1492046671/"
       image:
-        x: "img/books/kcb_cover_amazon.jpeg"
-        _2x: "img/books/kcb_cover_amazon.jpeg"
+        x: "img/books/kcb_cute.jpeg"
+        _2x: "img/books/kcb_cute@2x.jpeg"
       is_even: false
 
     - title: "Modern Java Recipes"
@@ -143,8 +143,8 @@ books:
         btnText: "Amazon"
         URL: "https://www.amazon.com/Modern-Java-Recipes-Solutions-Difficult/dp/149197317X/"
       image:
-        x: "img/books/mjr_cover_amazon.jpeg"
-        _2x: "img/books/mjr_cover_amazon.jpeg"
+        x: "img/books/mjr_cute.jpeg"
+        _2x: "img/books/mjr_cute@2x.jpeg"
       is_even: true
 
     - title: "Gradle Recipes for Android"
@@ -155,8 +155,8 @@ books:
         btnText: "Amazon"
         URL: "https://www.amazon.com/Gradle-Recipes-Android-Master-System-ebook/dp/B01GQTM84E"
       image:
-        x: "img/books/gra_cover_amazon.jpeg"
-        _2x: "img/books/gra_cover_amazon.jpeg"
+        x: "img/books/gra_cute.jpeg"
+        _2x: "img/books/gra_cute@2x.jpeg"
       is_even: false
 
     - title: "Making Java Groovy"
@@ -167,8 +167,8 @@ books:
         btnText: "Manning"
         URL: "https://www.manning.com/books/making-java-groovy"
       image:
-        x: "img/books/mjg_cover_amazon.jpeg"
-        _2x: "img/books/mjg_cover_amazon.jpeg"
+        x: "img/books/mjg_cute.jpeg"
+        _2x: "img/books/mjg_cute@2x.jpeg"
       is_even: true
 
 # experience
