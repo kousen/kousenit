@@ -115,7 +115,7 @@ books:
       button:
         icon: "icon-arrow-right"
         btnText: "Pragmatic Programmers"
-        URL: "https://www.amazon.com/Help-Your-Boss-You-Opportunities/dp/1680508229/"
+        URL: "https://pragprog.com/titles/kkmanage/help-your-boss-help-you/"
       image:
         x: "img/books/hybhy_cute.jpeg"
         _2x: "img/books/hybhy_cute@2x.jpeg"
