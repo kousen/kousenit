@@ -175,7 +175,7 @@ books:
 experience:
   enable: true
   title: "Experience"
-  description: "Technical Trainer, Software Developer, Research Scientist"
+  description: "Educator, Technical Trainer, Software Developer"
   button:
     icon: "icon-linkedin-fill"
     btnText: "Linkedin"
@@ -185,6 +185,14 @@ experience:
     - title: "President"
       company: "Kousen IT, Inc."
       duration: "March 2005 - present"
+
+    - title: "Professor of the Practice in Computer Science"
+      company: "Trinity College, Hartford, CT"
+      duration: "July 2024 - present"
+
+    - title: "Associate Director for STEM Initiatives"
+      company: "Elting Innovation and Entrepreneurship Center, Trinity College"
+      duration: "July 2024 - present"
 
     - title: "Speaker"
       company: "No Fluff, Just Stuff conference tour"
