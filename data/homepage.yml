@@ -98,7 +98,7 @@ books:
   books:
     - title: "Mockito Made Clear"
       publisher: "Pragmatic Programmers"
-      date: "June, 2022 (beta)"
+      date: "January, 2023"
       description: "Mockito is the most popular framework in the Java world for automating unit testing with dependencies. Learn the Mockito API and how and when to use stubs, mocks, and spies. On a deeper level, discover why the framework does what it does and how it can simplify unit testing in Java. Using Mockito, you’ll be able to isolate the code you want to test from the behavior or state of external dependencies without coding details of the dependency. You’ll gain insights into the Mockito API, save time when unit testing, and have confidence in your Java programs."
       button:
         icon: "icon-arrow-right"
@@ -110,7 +110,7 @@ books:
       is_even: false
 
     - title: "Help Your Boss Help You"
-      date: "August, 2021"
+      date: "August, 2021 (print); September, 2022 (audiobook, narrated by the author)"
       description: "Develop more productive habits in dealing with your manager. As a professional in the business world, you care about doing your job the right way. The quality of your work matters to you, both as a professional and as a person. The company you work for cares about making money and your boss is evaluated on that basis. Sometimes those goals overlap, but the different priorities mean conflict is inevitable. Take concrete steps to build a relationship with your manager that helps both sides succeed."
       button:
         icon: "icon-arrow-right"
