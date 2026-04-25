@@ -1,0 +1,25 @@
+<style>
+  /* Tighten the first block on the homepage. Hugo Blox stacks two padding sources:
+     .hbb-section adds 6rem top/bottom to every block, and .resume-biography
+     adds a responsive py-* on top of that. We only collapse the FIRST section
+     so subsequent blocks keep their normal rhythm. */
+  #section-resume-biography-3.hbb-section {
+    padding-top: 1.5rem;
+  }
+  #section-resume-biography-3 .resume-biography {
+    padding-top: 0 !important;
+  }
+  @media (min-width: 1024px) {
+    #section-resume-biography-3 .resume-biography {
+      padding-top: 1rem !important;
+    }
+  }
+
+  /* The markdown block wraps content in max-w-prose (~720px) twice. The book
+     grid + custom education/interests grids need to break out to fill width. */
+  #books .max-w-prose,
+  #education .max-w-prose,
+  #interests .max-w-prose {
+    max-width: none !important;
+  }
+</style>

@@ -19,21 +19,16 @@ affiliations:
     url: https://www.trincoll.edu/
 
 links:
-  - icon: at-symbol
-    url: mailto:ken.kousen@kousenit.com
-    label: E-mail Me
   - icon: brands/youtube
-    url: https://youtube.com/@kenkousen?sub_confirmation=1
+    url: https://youtube.com/@talesfromthejarside
   - icon: brands/linkedin
     url: https://www.linkedin.com/in/kenkousen/
   - icon: brands/github
     url: https://github.com/kousen
+  - icon: brands/x
+    url: https://x.com/kenkousen
   - icon: brands/bluesky
     url: https://bsky.app/profile/kousenit.com
-  - icon: brands/mastodon
-    url: https://foojay.social/@kenkousen
-  - icon: brands/threads
-    url: https://www.threads.net/@kenkousen
 
 interests:
   - Java, Kotlin, Groovy
@@ -43,15 +38,15 @@ interests:
   - AI and Large Language Models
 
 education:
-  - degree: MS Computer Science
-    institution: Rensselaer Polytechnic Institute
-    end: 2000-05-31
   - degree: PhD, Mechanical and Aerospace Engineering
     institution: Princeton University
     end: 1989-06-30
   - degree: MA, Mechanical and Aerospace Engineering
     institution: Princeton University
     end: 1986-06-30
+  - degree: MS Computer Science
+    institution: Rensselaer Polytechnic Institute
+    end: 2000-05-31
   - degree: BS Mechanical Engineering
     institution: Massachusetts Institute of Technology
     end: 1984-06-30
@@ -91,7 +86,7 @@ awards:
     awarder: Oracle
     summary: Recognition for technical leadership and community contributions in the Java ecosystem.
     icon: hero/trophy
-  - title: JavaOne Rock Star
+  - title: JavaOne Rock Star (three-time winner)
     awarder: JavaOne / Oracle
   - title: Devnexus Rock Star
     awarder: Devnexus

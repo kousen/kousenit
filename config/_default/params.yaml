@@ -86,6 +86,10 @@ hugoblox:
     sticky: true
     # Menu alignment
     align: center                       # left | center | right
+    # Brand display
+    show_title: false                   # logo speaks for itself; suppress duplicate wordmark
+    show_logo: true                     # auto-detected from assets/media/logo.png
+    title: "Kousen IT, Inc."            # used as logo alt text + browser title fallback
     # Feature toggles
     search: true
     theme_toggle: true
@@ -114,9 +118,9 @@ hugoblox:
   # ────────────────────────────────────────────────────────────────────────────
   copyright:
     # Copyright notice - supports {year}, {name}, {license} placeholders
-    notice: "© {year} {name}. This work is licensed under {license}"
+    notice: "© {year} {name}. All rights reserved."
     license:
-      type: cc                          # cc | custom
+      type: custom                      # cc | custom
       allow_derivatives: false
       share_alike: true
       allow_commercial: false
