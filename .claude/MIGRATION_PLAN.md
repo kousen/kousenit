@@ -1,7 +1,8 @@
 # kousenit.com — Migration + Chatbot Plan
 
 **Drafted:** 2026-04-19
-**Status:** Planning complete, implementation deferred to a later session this week.
+**Last updated:** 2026-04-25
+**Status:** Planning complete; small content/cleanup work shipped; major migration phases still pending.
 
 ---
 
@@ -15,11 +16,25 @@
 - Hugo version is not pinned in the repo — whatever the Heroku buildpack grabs.
 - Dependabot alerts from a prior stale `package.json` are all auto-resolved ("state: fixed") — no live vulnerabilities.
 
-### Recently completed (same session as this plan)
+### Completed (2026-04-19 session — repo plumbing)
 - Git remote fixed: was Heroku-only, now tracks `github/main` (with `heroku` remote retained as manual escape hatch).
 - GitHub default branch renamed `master` → `main`; old `master` deleted.
 - Heroku GitHub integration active: auto-deploys from `github/main`.
-- `public/` added to `.gitignore`.
+- `public/` and `.hugo_build.lock` added to `.gitignore`; IDE files (`.idea/*`) untracked.
+- Confirmed `HUGO_VERSION=0.69.0` already pinned in Heroku config vars (pre-existing — explains site stability).
+- Two pipeline deploys validated end-to-end.
+
+### Completed (2026-04-25 session — content + cleanup, while on Heroku)
+- **Book covers replaced** with AI-generated cute-animal images. Each book section now shows the corresponding animal reading the book (otter/Kotlin Cookbook, koala/Mockito Made Clear, cat/Help Your Boss Help You, sambar/Modern Java Recipes, hedgehog/Gradle Recipes for Android, red panda/Making Java Groovy). Resized to 600px @1x / 1200px @2x JPEGs (q85). Original `*_cover_*.jpeg` files retained on disk for rollback.
+- Kotlin Cookbook image is intentionally landscape — shows otter on shore with the other 5 books in view; deliberate visual variety.
+- **HYBHY link fixed** to point to Pragmatic Bookshelf (`pragprog.com/titles/kkmanage/help-your-boss-help-you/`) — button text already said "Pragmatic Programmers" but URL went to Amazon.
+- **Trinity College roles added** to Experience section — two concurrent appointments since July 2024 (Professor of the Practice in CS; Associate Director for STEM Initiatives, Elting Innovation and Entrepreneurship Center).
+- Section description updated from "Technical Trainer, Software Developer, Research Scientist" to "Educator, Technical Trainer, Software Developer".
+
+### Notes for future sessions
+- Ken's "Associate Director for STEM Initiatives" title is expected to change to "Director, Hartford AI Center" at some future date (also saved in memory).
+- A new portrait photo (`~/Pictures/me/me_portrait_gpt_image_2_apr2026.png`) exists and is a strong image — fedora, dark moody studio background, serious gaze. **Deliberately NOT swapped into the current site** because its tone clashes with the playful cute-animals direction. Earmark for the future redesign.
+- Ken explicitly confirmed (2026-04-25): "looking for a more light-hearted approach, and eventually will probably do a full redesign." This validates the cute-animals direction and tells us the next major visual refresh will be holistic, not incremental.
 
 ### Target state
 - Hugo site on **Cloudflare Pages** (free tier, auto-deploy from GitHub, native Hugo support).
