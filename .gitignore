@@ -11,3 +11,5 @@ package-lock.json
 .idea/workspace.xml
 public/
 .hugo_build.lock
+resources/_gen/
+hugo_stats.json
