@@ -1,0 +1,340 @@
+{
+  "data": [
+    {
+      "id": 55222657,
+      "zone_id": "kousenit.com",
+      "type": "SOA",
+      "name": "",
+      "content": "ns1.dnsimple.com admin.dnsimple.com 1716222322 86400 7200 604800 300",
+      "ttl": 3600,
+      "system_record": true,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-05-20T16:24:52Z",
+      "updated_at": "2026-04-25T22:38:41Z"
+    },
+    {
+      "id": 55222658,
+      "zone_id": "kousenit.com",
+      "type": "NS",
+      "name": "",
+      "content": "ns1.dnsimple.com",
+      "ttl": 3600,
+      "system_record": true,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-05-20T16:24:52Z",
+      "updated_at": "2024-05-20T16:24:52Z"
+    },
+    {
+      "id": 55222659,
+      "zone_id": "kousenit.com",
+      "type": "NS",
+      "name": "",
+      "content": "ns2.dnsimple-edge.net",
+      "ttl": 3600,
+      "system_record": true,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-05-20T16:24:52Z",
+      "updated_at": "2024-05-20T16:24:52Z"
+    },
+    {
+      "id": 55222660,
+      "zone_id": "kousenit.com",
+      "type": "NS",
+      "name": "",
+      "content": "ns3.dnsimple.com",
+      "ttl": 3600,
+      "system_record": true,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-05-20T16:24:52Z",
+      "updated_at": "2024-05-20T16:24:52Z"
+    },
+    {
+      "id": 55222661,
+      "zone_id": "kousenit.com",
+      "type": "NS",
+      "name": "",
+      "content": "ns4.dnsimple-edge.org",
+      "ttl": 3600,
+      "system_record": true,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-05-20T16:24:52Z",
+      "updated_at": "2024-05-20T16:24:52Z"
+    },
+    {
+      "id": 55222670,
+      "zone_id": "kousenit.com",
+      "type": "MX",
+      "name": "",
+      "content": "alt2.aspmx.l.google.com",
+      "ttl": 3600,
+      "priority": 5,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-05-20T16:25:14Z",
+      "updated_at": "2024-05-20T16:25:14Z"
+    },
+    {
+      "id": 55222671,
+      "zone_id": "kousenit.com",
+      "type": "MX",
+      "name": "",
+      "content": "alt4.aspmx.l.google.com",
+      "ttl": 3600,
+      "priority": 10,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-05-20T16:25:14Z",
+      "updated_at": "2024-05-20T16:25:14Z"
+    },
+    {
+      "id": 55222672,
+      "zone_id": "kousenit.com",
+      "type": "MX",
+      "name": "",
+      "content": "alt1.aspmx.l.google.com",
+      "ttl": 3600,
+      "priority": 5,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-05-20T16:25:14Z",
+      "updated_at": "2024-05-20T16:25:14Z"
+    },
+    {
+      "id": 55222673,
+      "zone_id": "kousenit.com",
+      "type": "MX",
+      "name": "",
+      "content": "alt3.aspmx.l.google.com",
+      "ttl": 3600,
+      "priority": 10,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-05-20T16:25:14Z",
+      "updated_at": "2024-05-20T16:25:14Z"
+    },
+    {
+      "id": 55222674,
+      "zone_id": "kousenit.com",
+      "type": "MX",
+      "name": "",
+      "content": "aspmx.l.google.com",
+      "ttl": 3600,
+      "priority": 1,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-05-20T16:25:14Z",
+      "updated_at": "2024-05-20T16:25:14Z"
+    },
+    {
+      "id": 55222675,
+      "zone_id": "kousenit.com",
+      "type": "TXT",
+      "name": "",
+      "content": "\"openai-domain-verification=dv-oumLel1pbLfryj8B5txVVBbY\"",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-05-20T16:25:14Z",
+      "updated_at": "2024-05-20T16:25:14Z"
+    },
+    {
+      "id": 55222676,
+      "zone_id": "kousenit.com",
+      "type": "CNAME",
+      "name": "www",
+      "content": "www.kousenit.com.herokudns.com",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-05-20T16:25:14Z",
+      "updated_at": "2026-04-25T22:38:41Z"
+    },
+    {
+      "id": 59624340,
+      "zone_id": "kousenit.com",
+      "type": "TXT",
+      "name": "_dmarc",
+      "content": "\"v=DMARC1; p=reject; rua=mailto:dmarc-reports@kousenit.com; adkim=r; aspf=r\"",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-10-30T21:20:57Z",
+      "updated_at": "2024-11-07T13:50:19Z"
+    },
+    {
+      "id": 59669788,
+      "zone_id": "kousenit.com",
+      "type": "TXT",
+      "name": "google._domainkey",
+      "content": "\"v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA373x7mfRwSjmR+yu9JFd++L9EFTbOIq6RJeN7JAn6AJV5dGDxAR+x9YHVRiPgZuruUgdX+WQ63Llb6ArK52n4miLuD0UYzjngZ1MJrFRleOzof5BTZdAlx5MsjyOtMjOUKzUJUkRTnXGj2slH6nR4asYy2rdUdk7BHPfWGpjfHIQRplctTTFhUkQtQlazOHx4baymm2APEi5oFn12uhsoPd0m8TnoS66KGxmKEJkVWaIe/BL0v16ERnwnHIEUq6wzqdS1cJzJuDlNkgFOPs2udG0xH6KlQYd4QCut4dZ3DBl6EQc7Vfz3v1MZrvbpsN9R97D8cqFVmXSFcWwo7Eg5QIDAQAB\"",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-11-01T15:04:25Z",
+      "updated_at": "2024-11-03T14:30:01Z"
+    },
+    {
+      "id": 59669836,
+      "zone_id": "kousenit.com",
+      "type": "TXT",
+      "name": "",
+      "content": "\"v=spf1 include:_spf.google.com ~all\"",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-11-01T15:07:12Z",
+      "updated_at": "2024-11-01T15:07:12Z"
+    },
+    {
+      "id": 59708522,
+      "zone_id": "kousenit.com",
+      "type": "TXT",
+      "name": "",
+      "content": "\"domain-verification=70b557db4f0be9230da453e1dd118311e76fdd3103ea58a2c21d96b322208604\"",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-11-02T20:48:14Z",
+      "updated_at": "2024-11-02T20:48:14Z"
+    },
+    {
+      "id": 59719608,
+      "zone_id": "kousenit.com",
+      "type": "TXT",
+      "name": "_atproto",
+      "content": "\"did=did:plc:dk2qm47sjyljrlurojujc7nu\"",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2024-11-03T14:36:18Z",
+      "updated_at": "2024-11-03T14:36:18Z"
+    },
+    {
+      "id": 63710148,
+      "zone_id": "kousenit.com",
+      "type": "CNAME",
+      "name": "certificate-service",
+      "content": "frozen-castle-06owka1oz1hcczj1ty980hab.herokudns.com",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2025-04-19T18:16:46Z",
+      "updated_at": "2025-04-19T18:16:46Z"
+    },
+    {
+      "id": 74365834,
+      "zone_id": "kousenit.com",
+      "type": "TXT",
+      "name": "resend._domainkey.updates",
+      "content": "\"p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDMUHjYifyuo/oU8BrpaY13LruW9LVrStIOcm/EYwja6FK3QvcBUvJOembTVu3ep9nk7RKS/9PdN85vr5RxA6snv8pb8GiFFQR9oiqgSOKCTOcjo7RA3GXenmPQ2WdVggrG1jiu3dTjo0QDB8MtLYva7VbTz3Wnh2Veek33srzsFQIDAQAB\"",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2026-03-22T19:15:41Z",
+      "updated_at": "2026-03-22T19:15:41Z"
+    },
+    {
+      "id": 74365860,
+      "zone_id": "kousenit.com",
+      "type": "MX",
+      "name": "send.updates",
+      "content": "feedback-smtp.us-east-1.amazonses.com",
+      "ttl": 3600,
+      "priority": 10,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2026-03-22T19:17:00Z",
+      "updated_at": "2026-03-22T19:17:00Z"
+    },
+    {
+      "id": 74365870,
+      "zone_id": "kousenit.com",
+      "type": "TXT",
+      "name": "send.updates",
+      "content": "\"v=spf1 include:amazonses.com ~all\"",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2026-03-22T19:17:33Z",
+      "updated_at": "2026-03-22T19:17:33Z"
+    },
+    {
+      "id": 74497790,
+      "zone_id": "kousenit.com",
+      "type": "CNAME",
+      "name": "mockhub",
+      "content": "9ztrr0ak.up.railway.app",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2026-03-25T16:14:11Z",
+      "updated_at": "2026-03-25T16:14:11Z"
+    },
+    {
+      "id": 74497820,
+      "zone_id": "kousenit.com",
+      "type": "TXT",
+      "name": "_railway-verify.mockhub",
+      "content": "\"railway-verify=d083f47844aab4d8662802cbf140ffa81c25fa96cd7e654f49529ebc951b38e4\"",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2026-03-25T16:15:22Z",
+      "updated_at": "2026-03-25T16:15:22Z"
+    },
+    {
+      "id": 75353789,
+      "zone_id": "kousenit.com",
+      "type": "TXT",
+      "name": "",
+      "content": "\"google-site-verification=q_8O6PeO4Td-3CKGytXvGiJvXw9ElOUlDk_FSeV_isg\"",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2026-04-17T16:20:47Z",
+      "updated_at": "2026-04-17T16:20:47Z"
+    },
+    {
+      "id": 75647767,
+      "zone_id": "kousenit.com",
+      "type": "ALIAS",
+      "name": "",
+      "content": "kousenit.com.herokudns.com",
+      "ttl": 3600,
+      "regions": [
+        "global"
+      ],
+      "created_at": "2026-04-25T22:30:02Z",
+      "updated_at": "2026-04-25T22:30:02Z"
+    }
+  ]
+}
