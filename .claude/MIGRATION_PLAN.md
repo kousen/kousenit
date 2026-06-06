@@ -1,8 +1,19 @@
 # kousenit.com — Migration + Chatbot Plan
 
 **Drafted:** 2026-04-19
-**Last updated:** 2026-04-25 (end-of-day)
-**Status:** New site built and live on Cloudflare Pages preview. Production cutover paused pending Cloudflare DNS move (next session).
+**Last updated:** 2026-06-06
+**Status:** ✅ **CUTOVER COMPLETE (2026-06-06).** Production `kousenit.com` + `www` now served by Cloudflare Pages over HTTPS. DNS moved to Cloudflare; email and all other services intact. Heroku still running as fallback during soak. Remaining: Phase 7 soak → Phase 8 retire Heroku → Phase 9 promote branch → Phase 13 registrar transfer.
+
+## Cutover record (2026-06-06)
+
+- **Cloudflare zone:** `kousenit.com`, zone ID `77fa387dccdb61de98eb8de8c54b8675`, account `612d35857ad57160f86b64091b4d6030`. Active as of 2026-06-06T22:15Z.
+- **Nameservers (set at Hover):** `delilah.ns.cloudflare.com`, `mitchell.ns.cloudflare.com`.
+- **DNS record source of truth at cutover:** `.claude/dns-baseline-kousenit-2026-05-21.md` + live pull 2026-06-06 (26 records, 21 non-system). Cloudflare's auto-scan imported only 17 — the 7 missing (Railway CNAMEs, `updates` subdomain SES/Resend mail, railway-verify TXTs) were backfilled via API. **Lesson: never trust the quick-scan for TXT/subdomain records.**
+- **No DNSSEC** (no DS at registry) — the plan's earlier worry was unfounded.
+- **Apex:** served via proxied `CNAME kousenit.com → kousenit.pages.dev` (Cloudflare flattening). `www` likewise. Both Pages custom domains active with SSL.
+- **certificate-service already on Railway** (`nt7d1e32.up.railway.app`) — Phase 10 was already done before this session; CNAME came across in the move.
+- **Content note:** old `/fiction/` was a Python `http.server` directory listing (not real content); the one file is preserved at `/fiction/st_tile` on Pages.
+- **Rollback (if needed during soak):** repoint apex+www back to Heroku — apex to 4 A records `99.83.183.127 / 3.33.193.101 / 15.197.246.237 / 52.223.46.195` (grey), `www` CNAME → `www.kousenit.com.herokudns.com` (grey). TTLs are 60s.
 
 ---
 
@@ -253,6 +264,33 @@ See "Reference: existing Worker pattern" + "Cloudflare MCP servers" sections bel
 ## Phase 12 — Chatbot UI on the Hugo site (deferred)
 
 Same as original plan. Add a fourth nav menu item for "Chat" once the Worker is up. Vanilla JS partial in the Hugo Blox theme via `layouts/_partials/hooks/head-end/`.
+
+---
+
+## Phase 13 — Transfer domain registration Hover → Cloudflare Registrar
+
+**Why:** Ken has no positive feeling for Hover. Once DNS is on Cloudflare (Phase 1-3), putting registration there too gives one pane of glass for DNS + registration + hosting, and Cloudflare Registrar charges at-cost — roughly **$9-10/year for `.com` vs Hover's ~$17/year**, with WHOIS privacy included free and no renewal upsells. Lifetime saving ~$7-9/year.
+
+**Prerequisites:**
+- ✅ Phase 1 done (Cloudflare zone for `kousenit.com` exists).
+- ✅ Phase 2 done (Hover NS already changed to Cloudflare's nameservers — DNS now lives at Cloudflare).
+- ✅ Site has soaked on the new infra for **at least a week** with no issues. The registrar transfer itself doesn't take the site offline, but soaking first means a smaller blast radius if anything else surfaces.
+
+**Steps:**
+
+1. **At Hover:** Unlock `kousenit.com` for transfer (DNS settings → Transfer lock OFF) and get the **auth/EPP code**.
+2. **At Cloudflare:** dashboard → kousenit.com → **Registrar** tab → start transfer → paste auth code → confirm contact info.
+3. **Approve the transfer email** Cloudflare sends to the WHOIS contact (or to you directly if WHOIS privacy is on).
+4. Hover sends a "domain transfer in progress" notice and may give you a 5-day window to deny it. Don't deny it.
+5. **Wait 5-7 days** for the transfer to complete. Domain stays live throughout — only the registrar of record changes; DNS at Cloudflare is unaffected.
+6. After transfer completes:
+   - Re-enable auto-renewal at Cloudflare (default on).
+   - Re-enable Transfer Lock at Cloudflare (recommended, default on).
+   - Close the Hover account if no other domains live there.
+
+**Concentration risk acknowledgement:** This puts DNS + hosting + registration all at Cloudflare. If they ever suspend the account, all three go down. Negligible probability for a personal site on a paying plan, but if it bugs you, **Porkbun** (~$10/yr for `.com`) is a well-regarded alternative independent of Cloudflare. Pick one provider; don't agonize.
+
+**Worth noting:** ICANN imposes a **60-day registrar lock** after any transfer. If the domain has been transferred in the last 60 days (it hasn't, by all indications), wait until that window closes.
 
 ---
 

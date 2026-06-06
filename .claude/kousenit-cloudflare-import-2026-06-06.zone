@@ -1,0 +1,28 @@
+; BIND export of kousenit.com — generated from live DNSimple state 2026-06-06
+; For Cloudflare 'Add a domain' BIND import (Phase 1). Faithful mirror of current state.
+; System records (NS, SOA) intentionally omitted — Cloudflare generates its own.
+; After import set proxy state: apex+www = leave DNS-only for now (repoint in Phase 4);
+;   certificate-service + mockhub = DNS-only (grey cloud) ALWAYS (Railway).
+$ORIGIN kousenit.com.
+
+@	60	IN	CNAME	kousenit.com.herokudns.com.	; was DNSimple ALIAS — Cloudflare flattens apex CNAME
+certificate-service	60	IN	CNAME	nt7d1e32.up.railway.app.
+mockhub	3600	IN	CNAME	9ztrr0ak.up.railway.app.
+www	60	IN	CNAME	www.kousenit.com.herokudns.com.
+@	3600	IN	MX	5 alt1.aspmx.l.google.com.
+@	3600	IN	MX	5 alt2.aspmx.l.google.com.
+@	3600	IN	MX	10 alt3.aspmx.l.google.com.
+@	3600	IN	MX	10 alt4.aspmx.l.google.com.
+@	3600	IN	MX	1 aspmx.l.google.com.
+send.updates	3600	IN	MX	10 feedback-smtp.us-east-1.amazonses.com.
+@	3600	IN	TXT	"domain-verification=70b557db4f0be9230da453e1dd118311e76fdd3103ea58a2c21d96b322208604"
+@	3600	IN	TXT	"google-site-verification=q_8O6PeO4Td-3CKGytXvGiJvXw9ElOUlDk_FSeV_isg"
+@	3600	IN	TXT	"openai-domain-verification=dv-oumLel1pbLfryj8B5txVVBbY"
+@	3600	IN	TXT	"v=spf1 include:_spf.google.com ~all"
+_atproto	3600	IN	TXT	"did=did:plc:dk2qm47sjyljrlurojujc7nu"
+_dmarc	3600	IN	TXT	"v=DMARC1; p=reject; rua=mailto:dmarc-reports@kousenit.com; adkim=r; aspf=r"
+_railway-verify.certificate-service	3600	IN	TXT	"railway-verify=ace62f44871a5c46f45abfd6bba27d1d2ae79618441d062bca23e138e157d0e4"
+_railway-verify.mockhub	3600	IN	TXT	"railway-verify=d083f47844aab4d8662802cbf140ffa81c25fa96cd7e654f49529ebc951b38e4"
+google._domainkey	3600	IN	TXT	"v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA373x7mfRwSjmR+yu9JFd++L9EFTbOIq6RJeN7JAn6AJV5dGDxAR+x9YHVRiPgZuruUgdX+WQ63Llb6ArK52n4miLuD0UYzjngZ1MJrFRleOzof5BTZdAlx5MsjyOtMjOUKzUJUkRTnXGj2slH6nR4asYy2rdUdk7BHPfWGpjfHIQRplctTTFhUkQtQlazOHx4baymm2APEi5oFn12uhsoPd0m8TnoS66KGxmKEJkVWaIe/BL0v16ERnwnHIEUq6wzqdS1cJzJuDlNkgFOPs2udG0xH6KlQYd4QCut4dZ3DBl6EQc7Vfz3v1MZrvbpsN9R97D8cqFVmXSFcWwo7Eg5QIDAQAB"
+resend._domainkey.updates	3600	IN	TXT	"p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDMUHjYifyuo/oU8BrpaY13LruW9LVrStIOcm/EYwja6FK3QvcBUvJOembTVu3ep9nk7RKS/9PdN85vr5RxA6snv8pb8GiFFQR9oiqgSOKCTOcjo7RA3GXenmPQ2WdVggrG1jiu3dTjo0QDB8MtLYva7VbTz3Wnh2Veek33srzsFQIDAQAB"
+send.updates	3600	IN	TXT	"v=spf1 include:amazonses.com ~all"
