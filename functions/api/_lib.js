@@ -73,6 +73,19 @@ export async function isFlagged(text, apiKey, doFetch = fetch) {
   }
 }
 
+// Log a visitor question to D1 for product insight. Minimal + anonymized:
+// timestamp, the (capped) question text, and a coarse country code — no IPs or
+// PII. Returns the run() promise for the caller to pass to waitUntil, or null
+// if there's no DB binding / no question (so logging is a safe no-op until the
+// CHAT_LOGS binding is configured).
+export function logQuestion(db, question, country = "") {
+  if (!db || !question) return null;
+  return db
+    .prepare("INSERT INTO questions (ts, question, country) VALUES (?, ?, ?)")
+    .bind(new Date().toISOString(), question.slice(0, 500), country)
+    .run();
+}
+
 // Parse OpenAI chat-completions SSE text and emit only the assistant content
 // deltas. Handles chunk boundaries that split mid-line.
 export function openAiSseToText() {

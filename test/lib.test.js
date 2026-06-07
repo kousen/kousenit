@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { corsHeaders, sanitizeMessages, openAiSseToText, isFlagged } from "../functions/api/_lib.js";
+import { corsHeaders, sanitizeMessages, openAiSseToText, isFlagged, logQuestion } from "../functions/api/_lib.js";
 
 describe("corsHeaders", () => {
   it("echoes an allowed origin", () => {
@@ -102,5 +102,35 @@ describe("isFlagged (moderation, injectable fetch)", () => {
   it("fails OPEN (false) on a non-OK response", async () => {
     const fakeFetch = async () => ({ ok: false });
     expect(await isFlagged("x", "key", fakeFetch)).toBe(false);
+  });
+});
+
+describe("logQuestion", () => {
+  it("returns null with no DB or no question (safe no-op)", () => {
+    expect(logQuestion(null, "hi")).toBe(null);
+    expect(logQuestion({}, "")).toBe(null);
+  });
+
+  it("inserts a timestamp, the capped question, and the country", async () => {
+    const captured = {};
+    const db = {
+      prepare(sql) {
+        captured.sql = sql;
+        return {
+          bind(...args) {
+            captured.args = args;
+            return { run: async () => ({ success: true }) };
+          },
+        };
+      },
+    };
+    const p = logQuestion(db, "x".repeat(1000), "US");
+    expect(p).toBeInstanceOf(Promise);
+    await p;
+    expect(captured.sql).toMatch(/INSERT INTO questions/);
+    expect(captured.args).toHaveLength(3);
+    expect(typeof captured.args[0]).toBe("string"); // ISO timestamp
+    expect(captured.args[1]).toHaveLength(500); // capped at 500 chars
+    expect(captured.args[2]).toBe("US");
   });
 });

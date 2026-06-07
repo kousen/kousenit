@@ -10,6 +10,7 @@ import {
   jsonResponse,
   sanitizeMessages,
   isFlagged,
+  logQuestion,
   openAiSseToText,
 } from "./_lib.js";
 
@@ -35,7 +36,8 @@ export function onRequestOptions({ request }) {
   });
 }
 
-export async function onRequestPost({ request, env }) {
+export async function onRequestPost(context) {
+  const { request, env } = context;
   const headers = corsHeaders(request.headers.get("Origin") || "");
 
   if (!env.OPENAI_API_KEY) {
@@ -65,6 +67,11 @@ export async function onRequestPost({ request, env }) {
       { headers: { ...headers, "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } }
     );
   }
+
+  // Log the question (anonymized) for product insight — non-blocking, and a
+  // no-op until the CHAT_LOGS D1 binding is configured.
+  const logP = logQuestion(env.CHAT_LOGS, latestUser?.content, request.headers.get("cf-ipcountry") || "");
+  if (logP) context.waitUntil(logP.catch((e) => console.error("question log failed:", e)));
 
   let upstream;
   try {
