@@ -2,7 +2,7 @@
 
 **Drafted:** 2026-04-19
 **Last updated:** 2026-06-07
-**Status:** ✅ **MIGRATION COMPLETE (2026-06-07).** Production on Cloudflare Pages over HTTPS, served from `main`. **Heroku retired — bill is $0** (app + add-ons destroyed 2026-06-07). Branch promotion done: `main` = the Hugo Blox site, Pages production branch = `main`, spike branches deleted. Only **Phase 13 (registrar Hover → Cloudflare)** remains, and it's optional/deferred (needs the Hover EPP code).
+**Status:** ✅ **FULLY COMPLETE (2026-06-07), incl. Phase 13.** Production on Cloudflare Pages over HTTPS, served from `main`. **Heroku retired — bill is $0.** Branch promotion done. **Registrar transferred Hover → Cloudflare (2026-06-07):** WHOIS now `Cloudflare, Inc.` (IANA 1910), expiry extended to 2028-03-07, all DNS/email verified intact post-transfer. Entire stack (DNS + hosting + registration) now consolidated on Cloudflare at-cost. **Remaining: just account-closure housekeeping** — close Heroku (empty), cancel DNSimple (only zone was kousenit.com, already bypassed since the 06-06 NS move), and close Hover (after confirming kousenit.com was its only domain).
 
 ### Phase 8 & 9 completion (2026-06-07)
 - **Heroku:** `heroku apps:destroy -a kousenit` done; "You have no apps"; git `heroku` remote auto-removed. Bill now $0.
