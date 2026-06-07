@@ -71,6 +71,24 @@ sections:
     design:
       columns: '1'
   - block: markdown
+    id: projects
+    content:
+      title: '🛠️ Projects'
+      text: |-
+        A few apps and open-source tools, with live demos where available.
+        {{< projects section="projects" >}}
+    design:
+      columns: '1'
+  - block: markdown
+    id: training
+    content:
+      title: '🧑‍🏫 Training Materials'
+      text: |-
+        Open-source course materials for AI coding tools.
+        {{< projects section="training" >}}
+    design:
+      columns: '1'
+  - block: markdown
     id: education
     content:
       title: '🎓 Education'
@@ -129,6 +147,8 @@ sections:
         - **Newsletter:** [Tales from the jar side (Substack)](https://kenkousen.substack.com)
         - **YouTube:** [Tales from the jar side](https://youtube.com/@talesfromthejarside)
         - **Location:** Marlborough, CT
+
+        🤖 *Agents welcome — click through to the machine-readable [llms.txt](/llms.txt).*
     design:
       columns: '1'
 ---

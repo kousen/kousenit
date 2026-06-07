@@ -5,6 +5,12 @@ main:
   - name: Books
     url: /#books
     weight: 20
+  - name: Projects
+    url: /#projects
+    weight: 25
+  - name: Training
+    url: /#training
+    weight: 30
   - name: Contact
     url: /#contact
     weight: 40

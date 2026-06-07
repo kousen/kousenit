@@ -1,0 +1,82 @@
+{
+  "_comment": "Single source of truth for the homepage Projects/Training sections, /llms.txt, and the chatbot's knowledge of Ken's repos. Add a project once here and it appears everywhere. 'live' is optional.",
+  "projects": [
+    {
+      "name": "MockHub",
+      "repo": "https://github.com/kousen/mockhub",
+      "live": "https://mockhub.kousenit.com",
+      "kind": "MCP server",
+      "stars": 4,
+      "description": "A concert-ticket marketplace that doubles as a teaching platform for AI integration (Model Context Protocol)."
+    },
+    {
+      "name": "certificate-service",
+      "repo": "https://github.com/kousen/certificate-service",
+      "live": "https://certificate-service.kousenit.com",
+      "kind": "web app",
+      "stars": 5,
+      "description": "Generates a digitally-signed PDF 'certificate of ownership' for Ken's books."
+    },
+    {
+      "name": "lyrics_trainer",
+      "repo": "https://github.com/kousen/lyrics_trainer",
+      "live": "https://kousen.github.io/lyrics_trainer/",
+      "kind": "web app",
+      "stars": 1,
+      "description": "A simple app for learning song lyrics."
+    },
+    {
+      "name": "GeminiMcpServer",
+      "repo": "https://github.com/kousen/GeminiMcpServer",
+      "kind": "MCP server",
+      "stars": 13,
+      "description": "Wraps Gemini 2.5 Flash in a Model Context Protocol server."
+    },
+    {
+      "name": "OsqueryMcpServer",
+      "repo": "https://github.com/kousen/OsqueryMcpServer",
+      "kind": "MCP server",
+      "stars": 8,
+      "description": "An MCP wrapper (and Claude Code skill) for osquery system diagnostics."
+    },
+    {
+      "name": "gh_mcp_server",
+      "repo": "https://github.com/kousen/gh_mcp_server",
+      "kind": "MCP server",
+      "stars": 5,
+      "description": "An MCP wrapper for the GitHub gh command-line tool."
+    }
+  ],
+  "training": [
+    {
+      "name": "Claude Code",
+      "repo": "https://github.com/kousen/claude-code-training",
+      "stars": 233,
+      "description": "Slides and demos for Ken's training course on Claude Code."
+    },
+    {
+      "name": "Codex CLI",
+      "repo": "https://github.com/kousen/codex-training",
+      "stars": 23,
+      "description": "Slides and exercises for Ken's training course on OpenAI's Codex CLI."
+    },
+    {
+      "name": "Antigravity",
+      "repo": "https://github.com/kousen/gemini-training",
+      "stars": 25,
+      "description": "Course materials for Google Antigravity. (Repo is still named gemini-training; materials updated, repo not yet renamed.)"
+    },
+    {
+      "name": "Spring AI",
+      "repo": "https://github.com/kousen/Spring_AI_Training_Course",
+      "stars": 20,
+      "description": "Exercises and solutions for Ken's training course on Spring AI."
+    },
+    {
+      "name": "LangChain4j",
+      "repo": "https://github.com/kousen/LangChain4j_Training_course",
+      "stars": 17,
+      "description": "Exercises and code for Ken's training course on the LangChain4j framework."
+    }
+  ]
+}

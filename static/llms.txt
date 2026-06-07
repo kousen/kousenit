@@ -1,0 +1,50 @@
+# Ken Kousen
+
+> Ken Kousen is a Java Champion, author of six technical books, and a trainer and speaker on Java, Kotlin, Spring, Gradle, Android, and practical AI/LLM integration. He runs Kousen IT, Inc., teaches at Trinity College, and publishes the weekly "Tales from the jar side" newsletter and YouTube channel. Contact: ken.kousen@kousenit.com
+
+## Books
+- [Mockito Made Clear](https://www.kousenit.com/publications/mockito-made-clear/): Mockito / testing (Pragmatic Bookshelf)
+- [Help Your Boss Help You](https://www.kousenit.com/publications/help-your-boss-help-you/): managing up for technical pros (Pragmatic Bookshelf)
+- [Kotlin Cookbook](https://www.kousenit.com/publications/kotlin-cookbook/): Kotlin recipes (O'Reilly)
+- [Modern Java Recipes](https://www.kousenit.com/publications/modern-java-recipes/): modern/functional Java (O'Reilly)
+- [Gradle Recipes for Android](https://www.kousenit.com/publications/gradle-recipes-for-android/): Gradle for Android (O'Reilly)
+- [Making Java Groovy](https://www.kousenit.com/publications/making-java-groovy/): the Groovy/Java intersection (Manning)
+
+## Projects
+- [MockHub](https://github.com/kousen/mockhub): A concert-ticket marketplace that doubles as a teaching platform for AI integration (Model Context Protocol). (live: https://mockhub.kousenit.com)
+- [certificate-service](https://github.com/kousen/certificate-service): Generates a digitally-signed PDF 'certificate of ownership' for Ken's books. (live: https://certificate-service.kousenit.com)
+- [lyrics_trainer](https://github.com/kousen/lyrics_trainer): A simple app for learning song lyrics. (live: https://kousen.github.io/lyrics_trainer/)
+- [GeminiMcpServer](https://github.com/kousen/GeminiMcpServer): Wraps Gemini 2.5 Flash in a Model Context Protocol server.
+- [OsqueryMcpServer](https://github.com/kousen/OsqueryMcpServer): An MCP wrapper (and Claude Code skill) for osquery system diagnostics.
+- [gh_mcp_server](https://github.com/kousen/gh_mcp_server): An MCP wrapper for the GitHub gh command-line tool.
+
+## Training materials
+- [Claude Code](https://github.com/kousen/claude-code-training): Slides and demos for Ken's training course on Claude Code.
+- [Codex CLI](https://github.com/kousen/codex-training): Slides and exercises for Ken's training course on OpenAI's Codex CLI.
+- [Antigravity](https://github.com/kousen/gemini-training): Course materials for Google Antigravity. (Repo is still named gemini-training; materials updated, repo not yet renamed.)
+- [Spring AI](https://github.com/kousen/Spring_AI_Training_Course): Exercises and solutions for Ken's training course on Spring AI.
+- [LangChain4j](https://github.com/kousen/LangChain4j_Training_course): Exercises and code for Ken's training course on the LangChain4j framework.
+
+## Recent newsletter issues
+- [Tales from the jar side: jqwik Prompt Injection attack, Opus 4.8, Pangram AI detection, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-jqwik-prompt)
+- [Tales from the jar side: Decline of social media, Grok burns down the town, Skills + sub-agents, Subsidized AI, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-decline-of)
+- [Tales from the jar side: Commencement, Claude Hooks and my Pixoo64, Anthropic confuses everybody, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-commencement)
+- [Tales from the jar side: Mythos, Anthropic makes a deal, Musk v Sam, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-mythos-anthropic)
+- [Tales from the jar side: Web Clipper's Reader Mode, Senior Project Presentations, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-web-clippers)
+- [Tales from the jar side: GPT Image 2, Open Brain, Anthropic Blunders, Meta is Evil, and the usual Social Media Posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-gpt-image)
+
+## Recent videos
+- [I "Distilled" Claude for $1.61 — Here's What Actually Transferred](https://www.youtube.com/watch?v=vd0K9_Ez1kU)
+- [I stopped hating UI tests (here's why)](https://www.youtube.com/watch?v=-wyHSKOCZXs)
+- [I Created a Working Star Trek Computer (Full Java Stack)](https://www.youtube.com/watch?v=q8sXNXR6iKc)
+- [RAG Fundamentals: Hands on with LangChain, Spring AI, & LangChain4j](https://www.youtube.com/watch?v=3kMwv7Kraxk)
+- [When One Agent Isn’t Enough: Experiments with Multi-Agent AI](https://www.youtube.com/watch?v=ywh2KGDUv08)
+- [The Biggest Mistake Developers Make With AI Agents #ai #coding](https://www.youtube.com/watch?v=GTR7KnHnn-w)
+
+## Links
+- [Newsletter (Tales from the jar side)](https://kenkousen.substack.com)
+- [YouTube (Tales from the jar side)](https://youtube.com/@talesfromthejarside)
+- [Blog (Stuff I've Learned Recently)](https://kousenit.org)
+- [GitHub](https://github.com/kousen)
+- [LinkedIn](https://www.linkedin.com/in/kenkousen/)
+- [Bluesky](https://bsky.app/profile/kousenit.com)

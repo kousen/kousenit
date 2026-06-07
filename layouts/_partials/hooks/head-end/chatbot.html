@@ -96,7 +96,10 @@
       '<section class="kic-panel" id="kic-panel" role="dialog" aria-modal="false" aria-label="Ask about Ken — AI assistant" hidden>' +
         '<header class="kic-head">' +
           '<div><h3>Ask about Ken</h3><p>AI assistant — knows his books, talks &amp; work</p></div>' +
-          '<button class="kic-close" id="kic-close" aria-label="Close">&times;</button>' +
+          '<div style="display:flex;align-items:center;gap:2px">' +
+            '<button class="kic-close" id="kic-suggest" aria-label="Show suggested questions" title="Suggested questions" style="font-size:17px">💡</button>' +
+            '<button class="kic-close" id="kic-close" aria-label="Close">&times;</button>' +
+          '</div>' +
         '</header>' +
         '<div class="kic-log" id="kic-log" aria-live="polite"></div>' +
         '<div class="kic-foot">' +
@@ -122,18 +125,23 @@
     }
     function close() { panel.classList.remove('kic-open'); panel.hidden = true; launch.style.display = ''; }
 
-    function renderIntro() {
+    function renderSeeds(introText) {
       var wrap = document.createElement('div'); wrap.className = 'kic-msg kic-bot';
-      var intro = document.createElement('div'); intro.className = 'kic-intro';
-      intro.textContent = "Hi! I'm Ken's site assistant. Ask me about his books, talks, newsletter, YouTube channel, or working together. Try one of these:";
-      wrap.appendChild(intro);
+      if (introText) {
+        var intro = document.createElement('div'); intro.className = 'kic-intro';
+        intro.textContent = introText;
+        wrap.appendChild(intro);
+      }
       var seeds = document.createElement('div'); seeds.className = 'kic-seeds';
       SEEDS.forEach(function (q) {
         var b = document.createElement('button'); b.className = 'kic-seed'; b.textContent = q;
         b.addEventListener('click', function () { ask(q); });
         seeds.appendChild(b);
       });
-      wrap.appendChild(seeds); log.appendChild(wrap);
+      wrap.appendChild(seeds); log.appendChild(wrap); log.scrollTop = log.scrollHeight;
+    }
+    function renderIntro() {
+      renderSeeds("Hi! I'm Ken's site assistant. Ask me about his books, talks, newsletter, YouTube channel, or working together. Try one of these:");
     }
 
     function addMsg(role, html) {
@@ -206,6 +214,7 @@
 
     launch.addEventListener('click', open);
     host.querySelector('#kic-close').addEventListener('click', close);
+    host.querySelector('#kic-suggest').addEventListener('click', function () { renderSeeds('Suggested questions:'); });
     send.addEventListener('click', submit);
     input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(); } });
     input.addEventListener('input', function () { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 96) + 'px'; });

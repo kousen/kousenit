@@ -1,0 +1,52 @@
+name: Refresh chatbot knowledge base
+
+# Pulls the latest newsletter issues + YouTube videos into the chatbot KB and
+# the llms.txt files, then commits the regenerated files (which triggers a
+# Cloudflare Pages deploy). Also re-runs when the project list or scripts change.
+on:
+  schedule:
+    - cron: "0 13 * * 1" # Mondays ~08:00–09:00 US Eastern
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "data/projects.json"
+      - "scripts/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-kb
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch latest newsletter + video feeds
+        # Non-fatal: if a feed is down, keep the last-known recent.json and still rebuild.
+        continue-on-error: true
+        run: node scripts/fetch-feeds.mjs
+
+      - name: Regenerate KB + llms files
+        run: node scripts/build-kb.mjs
+
+      - name: Commit regenerated files if changed
+        run: |
+          FILES="data/recent.json functions/api/_kb-data.js static/llms.txt static/llms-full.txt"
+          if [ -n "$(git status --porcelain $FILES)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add $FILES
+            git commit -m "chore: weekly refresh of chatbot KB + llms files"
+            git push
+            echo "Refreshed and pushed."
+          else
+            echo "No changes to commit."
+          fi

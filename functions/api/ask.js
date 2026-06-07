@@ -1,7 +1,21 @@
 // Cloudflare Pages Function — POST /api/ask
 // Streams a chatbot answer about Ken from OpenAI, with the system prompt + knowledge
 // base held server-side (never trusted from the client).
-import { SYSTEM_PROMPT } from "./_knowledge.js";
+import { PERSONA, KNOWLEDGE_BASE } from "./_knowledge.js";
+import { KB_DATA } from "./_kb-data.js";
+
+// Assemble the system prompt: stable PERSONA + KNOWLEDGE_BASE first (so OpenAI
+// caches that long prefix across requests), then the generated KB_DATA (books,
+// repos, and — once the weekly Action runs — recent newsletter issues + videos).
+const SYSTEM_PROMPT = `${PERSONA}
+
+========================================
+KNOWLEDGE BASE (everything you know about Ken)
+========================================
+
+${KNOWLEDGE_BASE}
+
+${KB_DATA}`;
 
 const MODEL = "gpt-5.4-mini";
 const MAX_TURNS = 12; // max messages accepted from the client

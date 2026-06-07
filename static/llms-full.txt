@@ -1,0 +1,96 @@
+# Ken Kousen — full reference for AI agents
+
+> Ken Kousen is a Java Champion, author of six technical books, and a trainer and speaker on Java, Kotlin, Spring, Gradle, Android, and practical AI/LLM integration. He runs Kousen IT, Inc., teaches at Trinity College, and publishes the weekly "Tales from the jar side" newsletter and YouTube channel. Contact: ken.kousen@kousenit.com
+
+This file is auto-generated from kousenit.com's data and is the same knowledge the site chatbot uses.
+
+# About Ken Kousen
+
+Ken Kousen is a Java Champion, the author of six technical books, and a Visiting Professor of the Practice in Computer Science at Trinity College (Hartford, CT). He runs Kousen IT, Inc., providing technical training, mentoring, and software development in Java, Kotlin, Spring, Gradle, Android, and AI/LLM topics. He is a long-time speaker on the No Fluff, Just Stuff (NFJS) conference tour, a three-time JavaOne Rock Star, and a Devnexus Rock Star.
+
+- Company: Kousen IT, Inc. (president since 2005).
+- Trinity College (since 2024): Visiting Professor of the Practice in Computer Science, and Associate Director for STEM Initiatives in the Elting Innovation & Entrepreneurship Center. He teaches AI and Software Design courses, oversees student initiatives focused on agentic coding and practical AI applications in industry, and develops professional AI training programs that bridge academic research and real-world business practice.
+- Education: Ph.D. and M.A. in Mechanical/Aerospace Engineering (Princeton); M.S. in Computer Science (RPI); B.S. in Mechanical Engineering and B.S. in Mathematics (MIT).
+- Earlier career: Senior Instructor / Enterprise Architect at Golden Consulting (2000-2005); Research Scientist at United Technologies Research Center (1988-2000).
+
+# Newsletter — "Tales from the jar side" (Substack, weekly)
+
+Ken publishes an active weekly newsletter at kenkousen.substack.com. The name puns on Gary Larson's The Far Side and Java .jar files. Recurring topics:
+- Java/Kotlin development and testing frameworks (JUnit, Mockito, jqwik).
+- AI tooling and integration (Claude/Opus, coding agents, "Skills + sub-agents"), AI detection and authenticity, AI safety and unintended consequences.
+- Commentary on social-media platform shifts, plus curated humor.
+- Anecdotes from speaking engagements and teaching.
+
+# YouTube — "Tales from the jar side" (@talesfromthejarside)
+
+A companion channel to the newsletter. Started December 2022; roughly 5,000+ subscribers, about 212 videos, and ~185K total views (as of mid-2026). Content themes:
+- AI/LLM in Java (the dominant theme): LangChain4j (tool support, chat memory, AI Services), Spring AI, RAG fundamentals, integrating OpenAI / Google Gemini / Anthropic Claude / Groq, running local models with Ollama, AI image generation (Flux, Stable Diffusion), audio/Whisper transcription, the Perplexity API, MCP, and Claude Code.
+- Core Java: records and sealed interfaces, Java 21 data-oriented programming, ranking Java features from 8 to 21, preview features.
+- Testing: Mockito (spies, BDDMockito, mocking final classes), JUnit 5, Spring Boot transactional-test gotchas, UI testing.
+- Gradle and build tooling: speeding up tests, jar/zip tasks, IDE integration.
+- Weekly roundup/commentary episodes: AI news, conference reports (NFJS, DevNexus), industry takes, and personal color.
+
+Notable videos include "Ranking Java Features Added from Versions 8 to 21," "Harnessing Java 21 for Data Oriented Programming," "The Definitive Guide to Tool Support in LangChain4J," "RAG Fundamentals," "Why Are Developers Obsessed With MCP Right Now?," "Transform Your Java Project with Claude Code," and a Mockito how-to series.
+
+# Blog — "Stuff I've Learned Recently" (kousenit.org)
+
+Occasional longer-form technical posts. Recent topics: what MCP is for, Spring AI streaming in JUnit tests, AI guardrails, the Perplexity API, and an AI-generated opera with LangChain4j. Updated less frequently than the newsletter.
+
+# Services — working with Ken
+
+Through Kousen IT, Inc., Ken offers:
+- Technical training for teams in Java, Kotlin, Groovy, Spring & Spring Boot, Gradle, Android, and — increasingly — practical AI/LLM integration for Java/Kotlin developers (Spring AI, LangChain4j, RAG, and working with OpenAI/Gemini/Claude).
+- Mentoring for developers and teams adopting these technologies.
+- Software development and consulting in the same stack.
+- Conference talks and workshops; Ken is a long-time NFJS speaker and presents at events like DevNexus and jChampions.
+
+He is a great fit for engineering teams leveling up on modern Java/Kotlin, testing, and build automation, or adding AI capabilities to JVM applications. To discuss specifics, the best next step is to email ken.kousen@kousenit.com.
+
+# Links
+- Email: ken.kousen@kousenit.com
+- Newsletter: https://kenkousen.substack.com
+- YouTube: https://youtube.com/@talesfromthejarside
+- Blog: https://kousenit.org
+- LinkedIn: https://www.linkedin.com/in/kenkousen/
+- GitHub: https://github.com/kousen
+- Bluesky: https://bsky.app/profile/kousenit.com
+- X: https://x.com/kenkousen
+
+# Books (link to the book's page when you mention it)
+- [Mockito Made Clear](https://www.kousenit.com/publications/mockito-made-clear/) — Mockito / testing (Pragmatic Bookshelf)
+- [Help Your Boss Help You](https://www.kousenit.com/publications/help-your-boss-help-you/) — managing up for technical pros (Pragmatic Bookshelf)
+- [Kotlin Cookbook](https://www.kousenit.com/publications/kotlin-cookbook/) — Kotlin recipes (O'Reilly)
+- [Modern Java Recipes](https://www.kousenit.com/publications/modern-java-recipes/) — modern/functional Java (O'Reilly)
+- [Gradle Recipes for Android](https://www.kousenit.com/publications/gradle-recipes-for-android/) — Gradle for Android (O'Reilly)
+- [Making Java Groovy](https://www.kousenit.com/publications/making-java-groovy/) — the Groovy/Java intersection (Manning)
+
+# Projects & open-source tools (link the GitHub repo; add the live demo if present)
+- MockHub (MCP server) — A concert-ticket marketplace that doubles as a teaching platform for AI integration (Model Context Protocol). GitHub: https://github.com/kousen/mockhub · Live demo: https://mockhub.kousenit.com
+- certificate-service (web app) — Generates a digitally-signed PDF 'certificate of ownership' for Ken's books. GitHub: https://github.com/kousen/certificate-service · Live demo: https://certificate-service.kousenit.com
+- lyrics_trainer (web app) — A simple app for learning song lyrics. GitHub: https://github.com/kousen/lyrics_trainer · Live demo: https://kousen.github.io/lyrics_trainer/
+- GeminiMcpServer (MCP server) — Wraps Gemini 2.5 Flash in a Model Context Protocol server. GitHub: https://github.com/kousen/GeminiMcpServer
+- OsqueryMcpServer (MCP server) — An MCP wrapper (and Claude Code skill) for osquery system diagnostics. GitHub: https://github.com/kousen/OsqueryMcpServer
+- gh_mcp_server (MCP server) — An MCP wrapper for the GitHub gh command-line tool. GitHub: https://github.com/kousen/gh_mcp_server
+
+# Training materials (open-source course repos)
+- Claude Code: Slides and demos for Ken's training course on Claude Code. GitHub: https://github.com/kousen/claude-code-training
+- Codex CLI: Slides and exercises for Ken's training course on OpenAI's Codex CLI. GitHub: https://github.com/kousen/codex-training
+- Antigravity: Course materials for Google Antigravity. (Repo is still named gemini-training; materials updated, repo not yet renamed.) GitHub: https://github.com/kousen/gemini-training
+- Spring AI: Exercises and solutions for Ken's training course on Spring AI. GitHub: https://github.com/kousen/Spring_AI_Training_Course
+- LangChain4j: Exercises and code for Ken's training course on the LangChain4j framework. GitHub: https://github.com/kousen/LangChain4j_Training_course
+
+# Recent newsletter issues (link the issue URL when relevant)
+- [Tales from the jar side: jqwik Prompt Injection attack, Opus 4.8, Pangram AI detection, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-jqwik-prompt) — Sun, 31 May 2026
+- [Tales from the jar side: Decline of social media, Grok burns down the town, Skills + sub-agents, Subsidized AI, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-decline-of) — Sun, 24 May 2026
+- [Tales from the jar side: Commencement, Claude Hooks and my Pixoo64, Anthropic confuses everybody, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-commencement) — Sun, 17 May 2026
+- [Tales from the jar side: Mythos, Anthropic makes a deal, Musk v Sam, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-mythos-anthropic) — Sun, 10 May 2026
+- [Tales from the jar side: Web Clipper's Reader Mode, Senior Project Presentations, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-web-clippers) — Sun, 03 May 2026
+- [Tales from the jar side: GPT Image 2, Open Brain, Anthropic Blunders, Meta is Evil, and the usual Social Media Posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-gpt-image) — Sun, 26 Apr 2026
+
+# Recent YouTube videos (link the video URL when relevant)
+- [I "Distilled" Claude for $1.61 — Here's What Actually Transferred](https://www.youtube.com/watch?v=vd0K9_Ez1kU) — 2026-03-02
+- [I stopped hating UI tests (here's why)](https://www.youtube.com/watch?v=-wyHSKOCZXs) — 2026-02-23
+- [I Created a Working Star Trek Computer (Full Java Stack)](https://www.youtube.com/watch?v=q8sXNXR6iKc) — 2026-02-17
+- [RAG Fundamentals: Hands on with LangChain, Spring AI, & LangChain4j](https://www.youtube.com/watch?v=3kMwv7Kraxk) — 2026-02-13
+- [When One Agent Isn’t Enough: Experiments with Multi-Agent AI](https://www.youtube.com/watch?v=ywh2KGDUv08) — 2026-01-28
+- [The Biggest Mistake Developers Make With AI Agents #ai #coding](https://www.youtube.com/watch?v=GTR7KnHnn-w) — 2025-09-04
