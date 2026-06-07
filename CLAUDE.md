@@ -30,8 +30,18 @@ A floating chat widget answers visitor questions about Ken, powered by OpenAI. S
 - **Widget:** `layouts/_partials/hooks/head-end/chatbot.html` — dependency-free vanilla-JS floating pill + panel, seeded starter questions, streaming, minimal markdown rendering. Injects into `<body>` on load.
 - **Rate limiting:** a Cloudflare WAF rate-limiting rule on `/api/ask` (10 req / 10s / IP → 429), configured in the dashboard (Security → Security rules → Rate limiting rules).
 - **Security notes (also a teaching example for Ken's AI Integration course):** prompt injection is mitigated *structurally* — user text stays in `user` messages and never enters the privileged `developer` prompt — plus explicit system rules. Moderation covers harmful input. The bot has no tools and only a public-facing KB, so blast radius is small.
-- **Auto-links** the newsletter + YouTube channel; never invents per-issue/video URLs.
-- **Phase 2 (planned):** auto-refresh a "recent issues/videos" section from the Substack + YouTube RSS feeds (with per-item links), kept as a *separate trailing section* so the stable KB stays prompt-cached. Model: OpenAI (not Claude) — do not apply the claude-api skill here.
+- **Auto-links** books, repos, the newsletter/channel, and specific recent issues/videos — but only from URLs in the KB; it never invents one.
+
+### Content pipeline (v2, shipped 2026-06-07)
+One source feeds the homepage, the bot, and the agent files:
+- **`data/projects.json`** — single source for the homepage **Projects** + **Training** sections, the bot, and `llms.txt`. **To add a repo/course, edit this file** (it propagates everywhere on the next build/Action run).
+- **`scripts/fetch-feeds.mjs`** → writes `data/recent.json` (latest Substack issues + YouTube videos, public RSS, no keys).
+- **`scripts/build-kb.mjs`** → generates `functions/api/_kb-data.js` (the bot's linkable data) + `static/llms.txt` + `static/llms-full.txt` (`llms-full.txt` == the bot's knowledge). Imports `KNOWLEDGE_BASE` from `_knowledge.js`. Run: `node scripts/build-kb.mjs`.
+- **`.github/workflows/refresh-kb.yml`** — runs both scripts weekly (Mon ~13:00 UTC) + on push to `data/projects.json`/`scripts/**`, commits regenerated files (→ Pages redeploys). `OPENAI_API_KEY` not needed by the Action.
+- **Bot prompt** = `PERSONA` + `KNOWLEDGE_BASE` (stable, in `_knowledge.js`) + `KB_DATA` (generated). Stable part first so OpenAI caches it.
+- **Agent files:** `/llms.txt` (concise index) + `/llms-full.txt`, with `<link rel="alternate" type="text/markdown">` head hints (`layouts/_partials/hooks/head-end/agent-hints.html`) and a visible "Agents welcome" link in the Contact section.
+- **Homepage sections** render via `layouts/shortcodes/projects.html` (`{{</* projects section="projects" */>}}`) from `data/projects.json`; nav entries in `config/_default/menus.yaml`.
+- Model: OpenAI (not Claude) — do not apply the claude-api skill to this code.
 
 ## Design direction
 
