@@ -1,36 +1,5 @@
 {
-  "issues": [
-    {
-      "title": "Tales from the jar side: jqwik Prompt Injection attack, Opus 4.8, Pangram AI detection, and the usual Social Media posts",
-      "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-jqwik-prompt",
-      "date": "Sun, 31 May 2026"
-    },
-    {
-      "title": "Tales from the jar side: Decline of social media, Grok burns down the town, Skills + sub-agents, Subsidized AI, and the usual Social Media posts",
-      "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-decline-of",
-      "date": "Sun, 24 May 2026"
-    },
-    {
-      "title": "Tales from the jar side: Commencement, Claude Hooks and my Pixoo64, Anthropic confuses everybody, and the usual Social Media posts",
-      "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-commencement",
-      "date": "Sun, 17 May 2026"
-    },
-    {
-      "title": "Tales from the jar side: Mythos, Anthropic makes a deal, Musk v Sam, and the usual Social Media silliness",
-      "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-mythos-anthropic",
-      "date": "Sun, 10 May 2026"
-    },
-    {
-      "title": "Tales from the jar side: Web Clipper's Reader Mode, Senior Project Presentations, and the usual Social Media silliness",
-      "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-web-clippers",
-      "date": "Sun, 03 May 2026"
-    },
-    {
-      "title": "Tales from the jar side: GPT Image 2, Open Brain, Anthropic Blunders, Meta is Evil, and the usual Social Media Posts",
-      "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-gpt-image",
-      "date": "Sun, 26 Apr 2026"
-    }
-  ],
+  "issues": [],
   "videos": [
     {
       "title": "I \"Distilled\" Claude for $1.61 — Here's What Actually Transferred",

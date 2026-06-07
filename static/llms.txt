@@ -25,14 +25,6 @@
 - [Spring AI](https://github.com/kousen/Spring_AI_Training_Course): Exercises and solutions for Ken's training course on Spring AI.
 - [LangChain4j](https://github.com/kousen/LangChain4j_Training_course): Exercises and code for Ken's training course on the LangChain4j framework.
 
-## Recent newsletter issues
-- [Tales from the jar side: jqwik Prompt Injection attack, Opus 4.8, Pangram AI detection, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-jqwik-prompt)
-- [Tales from the jar side: Decline of social media, Grok burns down the town, Skills + sub-agents, Subsidized AI, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-decline-of)
-- [Tales from the jar side: Commencement, Claude Hooks and my Pixoo64, Anthropic confuses everybody, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-commencement)
-- [Tales from the jar side: Mythos, Anthropic makes a deal, Musk v Sam, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-mythos-anthropic)
-- [Tales from the jar side: Web Clipper's Reader Mode, Senior Project Presentations, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-web-clippers)
-- [Tales from the jar side: GPT Image 2, Open Brain, Anthropic Blunders, Meta is Evil, and the usual Social Media Posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-gpt-image)
-
 ## Recent videos
 - [I "Distilled" Claude for $1.61 — Here's What Actually Transferred](https://www.youtube.com/watch?v=vd0K9_Ez1kU)
 - [I stopped hating UI tests (here's why)](https://www.youtube.com/watch?v=-wyHSKOCZXs)
