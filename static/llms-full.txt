@@ -79,6 +79,14 @@ He is a great fit for engineering teams leveling up on modern Java/Kotlin, testi
 - Spring AI: Exercises and solutions for Ken's training course on Spring AI. GitHub: https://github.com/kousen/Spring_AI_Training_Course
 - LangChain4j: Exercises and code for Ken's training course on the LangChain4j framework. GitHub: https://github.com/kousen/LangChain4j_Training_course
 
+# Recent newsletter issues (link the issue URL when relevant)
+- [Tales from the jar side: jqwik Prompt Injection attack, Opus 4.8, Pangram AI detection, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-jqwik-prompt) — Sun, 31 May 2026
+- [Tales from the jar side: Decline of social media, Grok burns down the town, Skills + sub-agents, Subsidized AI, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-decline-of) — Sun, 24 May 2026
+- [Tales from the jar side: Commencement, Claude Hooks and my Pixoo64, Anthropic confuses everybody, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-commencement) — Sun, 17 May 2026
+- [Tales from the jar side: Mythos, Anthropic makes a deal, Musk v Sam, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-mythos-anthropic) — Sun, 10 May 2026
+- [Tales from the jar side: Web Clipper's Reader Mode, Senior Project Presentations, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-web-clippers) — Sun, 03 May 2026
+- [Tales from the jar side: GPT Image 2, Open Brain, Anthropic Blunders, Meta is Evil, and the usual Social Media Posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-gpt-image) — Sun, 26 Apr 2026
+
 # Recent YouTube videos (link the video URL when relevant)
 - [I "Distilled" Claude for $1.61 — Here's What Actually Transferred](https://www.youtube.com/watch?v=vd0K9_Ez1kU) — 2026-03-02
 - [I stopped hating UI tests (here's why)](https://www.youtube.com/watch?v=-wyHSKOCZXs) — 2026-02-23

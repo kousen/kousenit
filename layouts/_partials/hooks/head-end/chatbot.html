@@ -151,27 +151,10 @@
       return el;
     }
 
-    // Minimal, escape-first markdown rendering (bold, code, links, emails, bullet lists).
-    function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-    function inline(s){
-      return esc(s)
-        .replace(/`([^`]+)`/g, '<code>$1</code>')
-        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-        .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        .replace(/\b([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})\b/g, '<a href="mailto:$1">$1</a>');
-    }
-    function mdToHtml(md){
-      var lines = md.split('\n'), out = '', inList = false;
-      for (var i = 0; i < lines.length; i++) {
-        var m = lines[i].match(/^\s*[-*]\s+(.*)$/);
-        if (m) { if (!inList) { out += '<ul>'; inList = true; } out += '<li>' + inline(m[1]) + '</li>'; continue; }
-        if (inList) { out += '</ul>'; inList = false; }
-        if (lines[i].trim() === '') continue;
-        out += '<p>' + inline(lines[i]) + '</p>';
-      }
-      if (inList) out += '</ul>';
-      return out;
-    }
+    // Markdown renderer (esc/inline/mdToHtml) — single source in
+    // assets/js/chatbot-markdown.js (unit-tested); inlined here at build time
+    // with the `export ` keywords stripped so it lives in this IIFE.
+    {{ (resources.Get "js/chatbot-markdown.js").Content | replaceRE "(?m)^export " "" | safeJS }}
 
     async function ask(question) {
       if (busy) return;

@@ -16,3 +16,6 @@ hugo_stats.json
 # wrangler local secrets
 .dev.vars
 .wrangler/
+test-results/
+playwright-report/
+.last-run.json
