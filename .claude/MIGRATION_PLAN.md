@@ -1,8 +1,16 @@
 # kousenit.com — Migration + Chatbot Plan
 
 **Drafted:** 2026-04-19
-**Last updated:** 2026-06-06
-**Status:** ✅ **CUTOVER COMPLETE (2026-06-06).** Production `kousenit.com` + `www` now served by Cloudflare Pages over HTTPS. DNS moved to Cloudflare; email and all other services intact. Heroku still running as fallback during soak. Remaining: Phase 7 soak → Phase 8 retire Heroku → Phase 9 promote branch → Phase 13 registrar transfer.
+**Last updated:** 2026-06-07
+**Status:** ✅ **MIGRATION COMPLETE (2026-06-07).** Production on Cloudflare Pages over HTTPS, served from `main`. **Heroku retired — bill is $0** (app + add-ons destroyed 2026-06-07). Branch promotion done: `main` = the Hugo Blox site, Pages production branch = `main`, spike branches deleted. Only **Phase 13 (registrar Hover → Cloudflare)** remains, and it's optional/deferred (needs the Hover EPP code).
+
+### Phase 8 & 9 completion (2026-06-07)
+- **Heroku:** `heroku apps:destroy -a kousenit` done; "You have no apps"; git `heroku` remote auto-removed. Bill now $0.
+- **Promotion:** `main` fast-forwarded to the Hugo Blox tree (clean, no force-push); pushed; Pages `production_branch` switched `spike-hugo-blox` → `main` via API (GitHub source connection preserved); production deploy `17d5230a` (main @ `89fd8ed`) succeeded and is live. `.hugotheme` dropped off automatically.
+- **Branches:** `spike-hugo-blox` deleted (local + remote), `spike-blowfish` deleted (local). Only `main` remains.
+- **Site verified live:** `kousenit.com` + `www` HTTP 200, new portrait + tightened spacing present.
+- **Note:** Dependabot is active on the repo (saw a `dependabot/npm_and_yarn/preact-*` preview build) — there may be open dependency-update PRs worth a look.
+- **Also done this session:** homepage author portrait updated to `me_jun2025.png`; bio→Books spacing tightened. Dark-mode default left as `system` (decided against forcing dark).
 
 ## Cutover record (2026-06-06)
 
