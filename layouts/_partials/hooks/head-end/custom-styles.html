@@ -5,14 +5,28 @@
      so subsequent blocks keep their normal rhythm. */
   #section-resume-biography-3.hbb-section {
     padding-top: 1.5rem;
+    /* Collapse the bio block's bottom padding so it doesn't stack with the
+       next block's 6rem top into a ~12rem void before the Books section. */
+    padding-bottom: 0;
   }
   #section-resume-biography-3 .resume-biography {
     padding-top: 0 !important;
+    /* The bio block's own responsive py-* also pads the BOTTOM, which is the
+       real source of the gap below the social icons. Collapse it to match. */
+    padding-bottom: 0 !important;
   }
   @media (min-width: 1024px) {
     #section-resume-biography-3 .resume-biography {
       padding-top: 1rem !important;
+      padding-bottom: 1rem !important;
     }
+  }
+
+  /* The first markdown block (the "📚 Books" intro) sits right under the bio.
+     Trim its top padding so the bio → Books gap is a single comfortable
+     section break (~3rem) instead of the doubled-up default. */
+  #section-markdown.hbb-section {
+    padding-top: 3rem;
   }
 
   /* The markdown block wraps content in max-w-prose (~720px) twice. The book
