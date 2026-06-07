@@ -37,7 +37,7 @@ One source feeds the homepage, the bot, and the agent files:
 - **`data/projects.json`** — single source for the homepage **Projects** + **Training** sections, the bot, and `llms.txt`. **To add a repo/course, edit this file** (it propagates everywhere on the next build/Action run).
 - **`scripts/fetch-feeds.mjs`** → writes `data/recent.json` (latest Substack issues + YouTube videos, public RSS, no keys).
 - **`scripts/build-kb.mjs`** → generates `functions/api/_kb-data.js` (the bot's linkable data) + `static/llms.txt` + `static/llms-full.txt` (`llms-full.txt` == the bot's knowledge). Imports `KNOWLEDGE_BASE` from `_knowledge.js`. Run: `node scripts/build-kb.mjs`.
-- **`.github/workflows/refresh-kb.yml`** — runs both scripts weekly (Mon ~13:00 UTC) + on push to `data/projects.json`/`scripts/**`, commits regenerated files (→ Pages redeploys). `OPENAI_API_KEY` not needed by the Action.
+- **`.github/workflows/refresh-kb.yml`** — runs both scripts daily (~13:00 UTC ≈ 8–9am ET) + on push to `data/projects.json`/`scripts/**`, and commits regenerated files only when feeds changed (→ Pages redeploys). `OPENAI_API_KEY` not needed by the Action.
 - **Bot prompt** = `PERSONA` + `KNOWLEDGE_BASE` (stable, in `_knowledge.js`) + `KB_DATA` (generated). Stable part first so OpenAI caches it.
 - **Agent files:** `/llms.txt` (concise index) + `/llms-full.txt`, with `<link rel="alternate" type="text/markdown">` head hints (`layouts/_partials/hooks/head-end/agent-hints.html`) and a visible "Agents welcome" link in the Contact section.
 - **Homepage sections** render via `layouts/shortcodes/projects.html` (`{{</* projects section="projects" */>}}`) from `data/projects.json`; nav entries in `config/_default/menus.yaml`.

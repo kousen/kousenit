@@ -5,7 +5,7 @@ name: Refresh chatbot knowledge base
 # Cloudflare Pages deploy). Also re-runs when the project list or scripts change.
 on:
   schedule:
-    - cron: "0 13 * * 1" # Mondays ~08:00–09:00 US Eastern
+    - cron: "0 13 * * *" # Daily ~08:00–09:00 US Eastern (only commits when feeds changed)
   workflow_dispatch: {}
   push:
     branches: [main]
@@ -44,7 +44,7 @@ jobs:
             git config user.name  "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add $FILES
-            git commit -m "chore: weekly refresh of chatbot KB + llms files"
+            git commit -m "chore: refresh chatbot KB + llms files"
             git push
             echo "Refreshed and pushed."
           else
