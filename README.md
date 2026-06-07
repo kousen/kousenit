@@ -22,6 +22,7 @@ template, deployed on **Cloudflare Pages**, with a built-in **AI chatbot** and a
   == the bot's knowledge) per [llmstxt.org](https://llmstxt.org), plus
   `<link rel="alternate" type="text/markdown">` hints in the page head.
 - **Tested** — Vitest unit tests + Playwright end-to-end tests.
+- **Observability** — Cloudflare Web Analytics (privacy-first, no cookies), and the chatbot logs each question to a Cloudflare D1 database (anonymized) so you can see what visitors ask.
 
 ## Tech stack
 

@@ -49,6 +49,12 @@ One source feeds the homepage, the bot, and the agent files:
 - **Testability refactor:** pure logic is isolated — `functions/api/_lib.js`, `generateArtifacts()` in `build-kb.mjs`, and `parseSubstack`/`parseYouTube` in `fetch-feeds.mjs` (CLIs guarded by an `isMain` check so importing has no side effects); the widget renderer lives once in `assets/js/chatbot-markdown.js` and is inlined into the partial by Hugo (`export ` stripped).
 - pnpm 10 ignores dependency build scripts by default, so `vitest`/`@playwright/test` don't download browsers during the Cloudflare Pages `pnpm install` — the production build is unaffected.
 
+### Analytics & question logging
+- **Cloudflare Web Analytics** is enabled on the zone (privacy-first, no cookies, auto-injected at the edge — **no code in the repo**). View under Cloudflare dashboard → Analytics & Logs → Web Analytics.
+- **Question logging:** `/api/ask` logs each visitor question to **Cloudflare D1** (database `kousenit-chat-logs`, id `d1f28384-45e4-49e5-8408-d14f4536aa95`) via the **`CHAT_LOGS`** binding. ⚠️ **The binding is configured in the Pages dashboard** (Settings → Bindings → D1), NOT in the repo — recreate it if the project is ever rebuilt. Logging is anonymized (timestamp + capped question text + coarse `cf-ipcountry`; no IPs/PII), non-blocking (`context.waitUntil`), and guarded on `env.CHAT_LOGS` so it's a safe no-op without the binding. Helper: `logQuestion()` in `functions/api/_lib.js`. Table: `questions(id, ts, question, country)`. Inspect with:
+  `wrangler d1 execute kousenit-chat-logs --remote --command "SELECT question, COUNT(*) n FROM questions GROUP BY question ORDER BY n DESC LIMIT 20;"`
+  — the top questions are the signal for what to add to the KB.
+
 ## Design direction
 
 Site leans **light-hearted / playful**; a full redesign is planned later. See the `kousenit.com design direction` memory. Until the redesign, don't propose changes that clash with the playful tone. The author avatar was updated 2026-06-07 to a casual photo (`~/Pictures/me/me_jun2025.png`); the "serious fedora" portrait (`me_portrait_gpt_image_2_apr2026.png`) remains earmarked for the future redesign, not the current site.
