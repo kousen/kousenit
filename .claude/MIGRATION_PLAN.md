@@ -277,7 +277,7 @@ Same as original plan. Add a fourth nav menu item for "Chat" once the Worker is 
 
 ## Phase 13 — Transfer domain registration Hover → Cloudflare Registrar
 
-**Why:** Ken has no positive feeling for Hover. Once DNS is on Cloudflare (Phase 1-3), putting registration there too gives one pane of glass for DNS + registration + hosting, and Cloudflare Registrar charges at-cost — roughly **$9-10/year for `.com` vs Hover's ~$17/year**, with WHOIS privacy included free and no renewal upsells. Lifetime saving ~$7-9/year.
+**Why:** Ken has no positive feeling for Hover. Once DNS is on Cloudflare (Phase 1-3), putting registration there too gives one pane of glass for DNS + registration + hosting, and Cloudflare Registrar charges at-cost — roughly **$10-11/year for `.com` (confirm exact at transfer time — Verisign has raised `.com` wholesale) vs Hover's ~$19/year** (confirmed by Ken 2026-06-07), with WHOIS privacy included free and no renewal upsells. **Lifetime saving ~$8-9/year.**
 
 **Prerequisites:**
 - ✅ Phase 1 done (Cloudflare zone for `kousenit.com` exists).
