@@ -1,0 +1,218 @@
+{{/*
+  Site chatbot widget — a floating "Ask about Ken" pill that opens an AI chat
+  panel. Vanilla JS, no dependencies. Talks to the /api/ask Pages Function,
+  which holds the system prompt + knowledge base server-side and streams the
+  answer back. Built as a clean reference implementation (it doubles as a
+  teaching example for Ken's AI Integration course).
+
+  This hook renders inside <head>, so the script injects all visible DOM into
+  <body> on load rather than placing it in <head>.
+*/}}
+<style>
+  :root { --kic-accent: #6c4cf1; --kic-accent-2: #9b6cf2; }
+  .kic-launch {
+    position: fixed; right: 20px; bottom: 20px; z-index: 9998;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 18px; border: 0; border-radius: 999px; cursor: pointer;
+    font: 600 15px/1 system-ui, sans-serif; color: #fff;
+    background: linear-gradient(135deg, var(--kic-accent), var(--kic-accent-2));
+    box-shadow: 0 8px 24px rgba(108, 76, 241, .42);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .kic-launch:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(108,76,241,.5); }
+  .kic-launch .kic-spark { font-size: 17px; animation: kic-pulse 2.4s ease-in-out infinite; }
+  @keyframes kic-pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.18); opacity: .8; } }
+  @media (prefers-reduced-motion: reduce) { .kic-launch .kic-spark { animation: none; } }
+
+  .kic-panel {
+    position: fixed; right: 20px; bottom: 20px; z-index: 9999;
+    width: min(380px, calc(100vw - 32px)); height: min(580px, calc(100vh - 40px));
+    display: none; flex-direction: column; overflow: hidden;
+    background: #fff; color: #1a1a2e; border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(20, 12, 60, .28); border: 1px solid rgba(108,76,241,.15);
+  }
+  .kic-panel.kic-open { display: flex; }
+  @media (prefers-color-scheme: dark) {
+    .kic-panel { background: #16161f; color: #e8e8f0; border-color: rgba(155,108,242,.25); }
+  }
+  .kic-head {
+    padding: 14px 16px; color: #fff;
+    background: linear-gradient(135deg, var(--kic-accent), var(--kic-accent-2));
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .kic-head h3 { margin: 0; font: 700 16px/1.2 system-ui, sans-serif; }
+  .kic-head p { margin: 2px 0 0; font: 400 12px/1.3 system-ui, sans-serif; opacity: .9; }
+  .kic-close { background: transparent; border: 0; color: #fff; font-size: 22px; cursor: pointer; line-height: 1; padding: 4px; }
+  .kic-log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .kic-msg { max-width: 88%; padding: 10px 13px; border-radius: 14px; font: 400 14px/1.5 system-ui, sans-serif; word-wrap: break-word; }
+  .kic-msg p { margin: 0 0 8px; } .kic-msg p:last-child { margin: 0; }
+  .kic-msg ul { margin: 6px 0; padding-left: 20px; } .kic-msg li { margin: 2px 0; }
+  .kic-msg a { color: var(--kic-accent); }
+  .kic-msg code { background: rgba(108,76,241,.12); padding: 1px 5px; border-radius: 5px; font-size: 13px; }
+  .kic-user { align-self: flex-end; background: linear-gradient(135deg, var(--kic-accent), var(--kic-accent-2)); color: #fff; }
+  .kic-user a { color: #fff; text-decoration: underline; }
+  .kic-bot { align-self: flex-start; background: rgba(108,76,241,.08); }
+  @media (prefers-color-scheme: dark) { .kic-bot { background: rgba(155,108,242,.16); } }
+  .kic-intro { font: 400 14px/1.5 system-ui, sans-serif; opacity: .85; }
+  .kic-seeds { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+  .kic-seed {
+    text-align: left; padding: 9px 12px; border-radius: 12px; cursor: pointer;
+    border: 1px solid rgba(108,76,241,.35); background: transparent; color: inherit;
+    font: 500 13px/1.35 system-ui, sans-serif; transition: background .12s ease;
+  }
+  .kic-seed:hover { background: rgba(108,76,241,.1); }
+  .kic-foot { padding: 10px; border-top: 1px solid rgba(108,76,241,.14); display: flex; gap: 8px; align-items: flex-end; }
+  .kic-input {
+    flex: 1; resize: none; max-height: 96px; padding: 9px 12px; border-radius: 12px;
+    border: 1px solid rgba(108,76,241,.3); background: transparent; color: inherit;
+    font: 400 14px/1.4 system-ui, sans-serif;
+  }
+  .kic-input:focus { outline: 2px solid var(--kic-accent); outline-offset: -1px; }
+  .kic-send { border: 0; border-radius: 12px; cursor: pointer; padding: 0 15px; height: 38px; color: #fff;
+    background: linear-gradient(135deg, var(--kic-accent), var(--kic-accent-2)); font: 600 14px system-ui, sans-serif; }
+  .kic-send:disabled { opacity: .5; cursor: default; }
+  .kic-note { text-align: center; font: 400 10px/1.3 system-ui, sans-serif; opacity: .55; padding: 0 0 8px; }
+  .kic-dots span { animation: kic-blink 1.4s infinite both; } .kic-dots span:nth-child(2){animation-delay:.2s} .kic-dots span:nth-child(3){animation-delay:.4s}
+  @keyframes kic-blink { 0%,80%,100%{opacity:.2} 40%{opacity:1} }
+</style>
+
+<script>
+(function () {
+  // Seeded starter questions shown in an empty chat.
+  var SEEDS = [
+    "Should we work together?",
+    "What has Ken been covering on AI in Java lately?",
+    "What topics are on the YouTube channel?",
+    "Which of Ken's books should I start with?"
+  ];
+
+  function init() {
+    // Inject all widget DOM into <body>.
+    var host = document.createElement('div');
+    host.innerHTML =
+      '<button class="kic-launch" id="kic-launch" aria-label="Open the AI assistant to ask about Ken">' +
+        '<span class="kic-spark" aria-hidden="true">✨</span> Ask about Ken' +
+      '</button>' +
+      '<section class="kic-panel" id="kic-panel" role="dialog" aria-modal="false" aria-label="Ask about Ken — AI assistant" hidden>' +
+        '<header class="kic-head">' +
+          '<div><h3>Ask about Ken</h3><p>AI assistant — knows his books, talks &amp; work</p></div>' +
+          '<button class="kic-close" id="kic-close" aria-label="Close">&times;</button>' +
+        '</header>' +
+        '<div class="kic-log" id="kic-log" aria-live="polite"></div>' +
+        '<div class="kic-foot">' +
+          '<textarea class="kic-input" id="kic-input" rows="1" placeholder="Ask me anything about Ken…" aria-label="Your question"></textarea>' +
+          '<button class="kic-send" id="kic-send">Send</button>' +
+        '</div>' +
+        '<div class="kic-note">AI-generated · may be imperfect · verify anything important</div>' +
+      '</section>';
+    document.body.appendChild(host);
+
+    var launch = host.querySelector('#kic-launch');
+    var panel  = host.querySelector('#kic-panel');
+    var log    = host.querySelector('#kic-log');
+    var input  = host.querySelector('#kic-input');
+    var send   = host.querySelector('#kic-send');
+    var history = [];   // [{role:'user'|'assistant', content}]
+    var busy = false;
+
+    function open() {
+      panel.hidden = false; panel.classList.add('kic-open'); launch.style.display = 'none';
+      if (!log.childNodes.length) renderIntro();
+      input.focus();
+    }
+    function close() { panel.classList.remove('kic-open'); panel.hidden = true; launch.style.display = ''; }
+
+    function renderIntro() {
+      var wrap = document.createElement('div'); wrap.className = 'kic-msg kic-bot';
+      var intro = document.createElement('div'); intro.className = 'kic-intro';
+      intro.textContent = "Hi! I'm Ken's site assistant. Ask me about his books, talks, newsletter, YouTube channel, or working together. Try one of these:";
+      wrap.appendChild(intro);
+      var seeds = document.createElement('div'); seeds.className = 'kic-seeds';
+      SEEDS.forEach(function (q) {
+        var b = document.createElement('button'); b.className = 'kic-seed'; b.textContent = q;
+        b.addEventListener('click', function () { ask(q); });
+        seeds.appendChild(b);
+      });
+      wrap.appendChild(seeds); log.appendChild(wrap);
+    }
+
+    function addMsg(role, html) {
+      var el = document.createElement('div');
+      el.className = 'kic-msg ' + (role === 'user' ? 'kic-user' : 'kic-bot');
+      el.innerHTML = html; log.appendChild(el); log.scrollTop = log.scrollHeight;
+      return el;
+    }
+
+    // Minimal, escape-first markdown rendering (bold, code, links, emails, bullet lists).
+    function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function inline(s){
+      return esc(s)
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        .replace(/\b([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})\b/g, '<a href="mailto:$1">$1</a>');
+    }
+    function mdToHtml(md){
+      var lines = md.split('\n'), out = '', inList = false;
+      for (var i = 0; i < lines.length; i++) {
+        var m = lines[i].match(/^\s*[-*]\s+(.*)$/);
+        if (m) { if (!inList) { out += '<ul>'; inList = true; } out += '<li>' + inline(m[1]) + '</li>'; continue; }
+        if (inList) { out += '</ul>'; inList = false; }
+        if (lines[i].trim() === '') continue;
+        out += '<p>' + inline(lines[i]) + '</p>';
+      }
+      if (inList) out += '</ul>';
+      return out;
+    }
+
+    async function ask(question) {
+      if (busy) return;
+      var seeds = log.querySelector('.kic-seeds'); if (seeds) seeds.parentNode.remove();
+      busy = true; send.disabled = true;
+      addMsg('user', inline(question));
+      history.push({ role: 'user', content: question });
+
+      var bot = addMsg('bot', '<span class="kic-dots"><span>•</span><span>•</span><span>•</span></span>');
+      var answer = '';
+      try {
+        var res = await fetch('/api/ask', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history })
+        });
+        if (!res.ok || !res.body) {
+          var msg = 'Sorry — something went wrong. Please try again.';
+          try { var j = await res.json(); if (j && j.error) msg = j.error; } catch (e) {}
+          bot.innerHTML = mdToHtml(msg); throw new Error('bad response');
+        }
+        var reader = res.body.getReader(), dec = new TextDecoder();
+        while (true) {
+          var r = await reader.read();
+          if (r.done) break;
+          answer += dec.decode(r.value, { stream: true });
+          bot.innerHTML = mdToHtml(answer); log.scrollTop = log.scrollHeight;
+        }
+        if (answer.trim()) history.push({ role: 'assistant', content: answer });
+      } catch (e) {
+        if (!answer) bot.innerHTML = mdToHtml('Sorry — I had trouble reaching the assistant. Please try again.');
+      } finally {
+        busy = false; send.disabled = false; input.focus();
+      }
+    }
+
+    function submit() {
+      var q = input.value.trim(); if (!q) return;
+      input.value = ''; input.style.height = 'auto'; ask(q);
+    }
+
+    launch.addEventListener('click', open);
+    host.querySelector('#kic-close').addEventListener('click', close);
+    send.addEventListener('click', submit);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(); } });
+    input.addEventListener('input', function () { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 96) + 'px'; });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && panel.classList.contains('kic-open')) close(); });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
