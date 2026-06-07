@@ -43,6 +43,12 @@ One source feeds the homepage, the bot, and the agent files:
 - **Homepage sections** render via `layouts/shortcodes/projects.html` (`{{</* projects section="projects" */>}}`) from `data/projects.json`; nav entries in `config/_default/menus.yaml`.
 - Model: OpenAI (not Claude) — do not apply the claude-api skill to this code.
 
+### Tests
+- **Unit (Vitest): `pnpm test`** — `test/*.test.js` cover the markdown renderer (**XSS escaping**), feed parsing (CDATA, limits), `generateArtifacts()` output (links present, no invented URLs), and the `_lib.js` helpers (CORS allowlist, message sanitization, SSE→text transform, moderation fail-open).
+- **E2E (Playwright): `npx playwright install chromium` once, then `pnpm test:e2e`** — `test/e2e/chatbot.spec.js` drives the widget against `wrangler pages dev` with `/api/ask` **route-mocked** (deterministic, no OpenAI cost).
+- **Testability refactor:** pure logic is isolated — `functions/api/_lib.js`, `generateArtifacts()` in `build-kb.mjs`, and `parseSubstack`/`parseYouTube` in `fetch-feeds.mjs` (CLIs guarded by an `isMain` check so importing has no side effects); the widget renderer lives once in `assets/js/chatbot-markdown.js` and is inlined into the partial by Hugo (`export ` stripped).
+- pnpm 10 ignores dependency build scripts by default, so `vitest`/`@playwright/test` don't download browsers during the Cloudflare Pages `pnpm install` — the production build is unaffected.
+
 ## Design direction
 
 Site leans **light-hearted / playful**; a full redesign is planned later. See the `kousenit.com design direction` memory. Until the redesign, don't propose changes that clash with the playful tone. The author avatar was updated 2026-06-07 to a casual photo (`~/Pictures/me/me_jun2025.png`); the "serious fedora" portrait (`me_portrait_gpt_image_2_apr2026.png`) remains earmarked for the future redesign, not the current site.
