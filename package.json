@@ -23,5 +23,12 @@
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "vitest": "^4.1.8"
+  },
+  "pnpm": {
+    "comment": "Security overrides for transitive dev-tooling deps flagged by GitHub/Dependabot.",
+    "overrides": {
+      "tar@<7.5.3": "^7.5.3",
+      "picomatch@<2.3.2": "2.3.2"
+    }
   }
 }
