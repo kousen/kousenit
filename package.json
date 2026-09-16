@@ -27,7 +27,7 @@
   "pnpm": {
     "comment": "Security overrides for transitive dev-tooling deps flagged by GitHub/Dependabot.",
     "overrides": {
-      "tar@<7.5.3": "^7.5.3",
+      "tar@<7.5.21": "^7.5.21",
       "picomatch@<2.3.2": "2.3.2"
     }
   }
