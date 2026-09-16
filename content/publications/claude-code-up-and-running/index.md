@@ -33,6 +33,6 @@ projects: []
 slides: ""
 ---
 
-<img src="ram-reading.jpg" alt="A bespectacled ram in a cable-knit sweater reading Claude Code: Up and Running by the fire" class="rounded-xl shadow-lg mx-auto" style="max-width: 480px" />
+<img src="cover.jpeg" alt="Claude Code: Up and Running — O'Reilly cover" class="rounded-xl shadow-lg mx-auto" style="max-width: 360px" />
 
-<p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">The cover ram, off the clock. (Generated with Nano Banana.)</p>
+<p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">The actual cover. The ram above is the same one, off the clock.</p>
