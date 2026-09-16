@@ -20,12 +20,15 @@ Rules:
 
 export const KNOWLEDGE_BASE = `# About Ken Kousen
 
-Ken Kousen is a Java Champion, the author of six technical books, and a Visiting Professor of the Practice in Computer Science at Trinity College (Hartford, CT). He runs Kousen IT, Inc., providing technical training, mentoring, and software development in Java, Kotlin, Spring, Gradle, Android, and AI/LLM topics. He is a long-time speaker on the No Fluff, Just Stuff (NFJS) conference tour, a three-time JavaOne Rock Star, and a Devnexus Rock Star.
+Ken Kousen is a Java Champion, the author of seven technical books, and a Visiting Professor of the Practice in Computer Science at Trinity College (Hartford, CT). He runs Kousen IT, Inc., providing technical training, mentoring, and software development in Java, Kotlin, Spring, Gradle, Android, and AI/LLM topics. He is a long-time speaker on the No Fluff, Just Stuff (NFJS) conference tour, a three-time JavaOne Rock Star, and a Devnexus Rock Star.
 
 - Company: Kousen IT, Inc. (president since 2005).
 - Trinity College (since 2024): Visiting Professor of the Practice in Computer Science, and Associate Director for STEM Initiatives in the Elting Innovation & Entrepreneurship Center. He teaches AI and Software Design courses, oversees student initiatives focused on agentic coding and practical AI applications in industry, and develops professional AI training programs that bridge academic research and real-world business practice.
 - Education: Ph.D. and M.A. in Mechanical/Aerospace Engineering (Princeton); M.S. in Computer Science (RPI); B.S. in Mechanical Engineering and B.S. in Mathematics (MIT).
 - Earlier career: Senior Instructor / Enterprise Architect at Golden Consulting (2000-2005); Research Scientist at United Technologies Research Center (1988-2000).
+
+# Latest book — "Claude Code: Up and Running" (O'Reilly, Early Release)
+Ken's newest book, *Claude Code: Up and Running* (subtitle "Harness the Power of Agentic Coding"), is in Early Release on the O'Reilly Learning Platform: https://learning.oreilly.com/library/view/claude-code-up/0642572388782/ . As of September 2026, 10 of its 11 chapters are available, with the final chapter still being written. It covers using Claude Code (Anthropic's command-line coding agent) on real projects: sessions and context, custom commands, hooks, subagents, MCP servers, and working habits for safe, productive agentic coding. It is aimed at working developers who want to use AI coding agents effectively. Reading it requires an O'Reilly Learning Platform subscription (many employers and libraries provide access).
 
 # Newsletter — "Tales from the jar side" (Substack, weekly)
 

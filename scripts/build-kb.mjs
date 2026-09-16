@@ -18,12 +18,13 @@ import { KNOWLEDGE_BASE } from "../functions/api/_knowledge.js";
 export const SITE = "https://www.kousenit.com";
 
 export const SUMMARY =
-  "Ken Kousen is a Java Champion, author of six technical books, and a trainer and speaker on Java, " +
+  "Ken Kousen is a Java Champion, author of seven technical books, and a trainer and speaker on Java, " +
   "Kotlin, Spring, Gradle, Android, and practical AI/LLM integration. He runs Kousen IT, Inc., teaches " +
   'at Trinity College, and publishes the weekly "Tales from the jar side" newsletter and YouTube channel. ' +
   "Contact: ken.kousen@kousenit.com";
 
 export const BOOKS = [
+  { title: "Claude Code: Up and Running", slug: "claude-code-up-and-running", note: "agentic coding with Claude Code (O'Reilly, Early Release — 10 of 11 chapters available)" },
   { title: "Mockito Made Clear", slug: "mockito-made-clear", note: "Mockito / testing (Pragmatic Bookshelf)" },
   { title: "Help Your Boss Help You", slug: "help-your-boss-help-you", note: "managing up for technical pros (Pragmatic Bookshelf)" },
   { title: "Kotlin Cookbook", slug: "kotlin-cookbook", note: "Kotlin recipes (O'Reilly)" },

@@ -28,12 +28,13 @@ sections:
   - block: markdown
     content:
       title: '📚 Books'
-      subtitle: 'Six books on Java, Kotlin, Groovy, Gradle, Mockito, and managing up.'
+      subtitle: 'Seven books on Claude Code, Java, Kotlin, Groovy, Gradle, Mockito, and managing up.'
       text: |-
-        I've written six technical books over the past decade, on topics ranging
+        I've written seven technical books over the past decade, on topics ranging
         from the Groovy/Java intersection to modern Java functional programming,
         Kotlin, Gradle for Android, Mockito, and a managing-up handbook for
-        technical professionals.
+        technical professionals. The newest, *Claude Code: Up and Running*, is in
+        Early Release on the O'Reilly Learning Platform.
     design:
       columns: '1'
   - block: markdown
@@ -42,6 +43,11 @@ sections:
       title: ''
       text: |-
         <div class="not-prose grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-5xl mx-auto">
+          <a href="/publications/claude-code-up-and-running/" class="block hover:scale-105 transition-transform duration-200 relative">
+            <span class="absolute top-3 right-3 rounded-full bg-red-600 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white shadow">Early Release</span>
+            <img src="/publications/claude-code-up-and-running/featured.jpeg" alt="Claude Code: Up and Running" class="w-full rounded-xl shadow-lg" />
+            <p class="mt-3 text-center font-semibold">Claude Code: Up and Running</p>
+          </a>
           <a href="/publications/mockito-made-clear/" class="block hover:scale-105 transition-transform duration-200">
             <img src="/publications/mockito-made-clear/featured.jpeg" alt="Mockito Made Clear" class="w-full rounded-xl shadow-lg" />
             <p class="mt-3 text-center font-semibold">Mockito Made Clear</p>

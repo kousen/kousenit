@@ -10,7 +10,7 @@ template, deployed on **Cloudflare Pages**, with a built-in **AI chatbot** and a
 
 ## Features
 
-- **Static site** — bio, six published books, projects/apps, AI-tool training
+- **Static site** — bio, seven books (one in Early Release), projects/apps, AI-tool training
   materials, and contact, rendered by Hugo. Client-side search via Pagefind.
 - **"Ask about Ken" chatbot** — a floating widget backed by a Cloudflare Pages
   Function (`/api/ask`) that streams answers from OpenAI, with the system prompt
