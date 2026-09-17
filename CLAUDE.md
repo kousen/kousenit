@@ -35,7 +35,7 @@ A floating chat widget answers visitor questions about Ken, powered by OpenAI. S
 ### Content pipeline (v2, shipped 2026-06-07)
 One source feeds the homepage, the bot, and the agent files:
 - **`data/projects.json`** — single source for the homepage **Projects** + **Training** sections, the bot, and `llms.txt`. **To add a repo/course, edit this file** (it propagates everywhere on the next build/Action run).
-- **`scripts/fetch-feeds.mjs`** → writes `data/recent.json` (latest Substack issues + YouTube videos, public RSS, no keys).
+- **`scripts/fetch-feeds.mjs`** → writes `data/recent.json` (latest Substack issues + YouTube videos, public RSS, no keys). ⚠️ **Substack 403s GitHub Actions IPs**, so the newsletter feed is read through our own relay, `functions/api/substack-feed.js` (`/api/substack-feed`, fixed upstream URL); YouTube is fetched directly. A feed that falls back to prior data makes the script exit non-zero and the Action's last step turns the run **red** — a red `refresh-kb` run means a feed is stale (this failed silently Jun–Sep 2026).
 - **`scripts/build-kb.mjs`** → generates `functions/api/_kb-data.js` (the bot's linkable data) + `static/llms.txt` + `static/llms-full.txt` (`llms-full.txt` == the bot's knowledge). Imports `KNOWLEDGE_BASE` from `_knowledge.js`. Run: `node scripts/build-kb.mjs`.
 - **`.github/workflows/refresh-kb.yml`** — runs both scripts daily (~13:00 UTC ≈ 8–9am ET) + on push to `data/projects.json`/`scripts/**`, and commits regenerated files only when feeds changed (→ Pages redeploys). `OPENAI_API_KEY` not needed by the Action.
 - **Bot prompt** = `PERSONA` + `KNOWLEDGE_BASE` (stable, in `_knowledge.js`) + `KB_DATA` (generated). Stable part first so OpenAI caches it.

@@ -84,12 +84,12 @@ He is a great fit for engineering teams leveling up on modern Java/Kotlin, testi
 - LangChain4j: Exercises and code for Ken's training course on the LangChain4j framework. GitHub: https://github.com/kousen/LangChain4j_Training_course
 
 # Recent newsletter issues (link the issue URL when relevant)
-- [Tales from the jar side: jqwik Prompt Injection attack, Opus 4.8, Pangram AI detection, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-jqwik-prompt) — Sun, 31 May 2026
-- [Tales from the jar side: Decline of social media, Grok burns down the town, Skills + sub-agents, Subsidized AI, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-decline-of) — Sun, 24 May 2026
-- [Tales from the jar side: Commencement, Claude Hooks and my Pixoo64, Anthropic confuses everybody, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-commencement) — Sun, 17 May 2026
-- [Tales from the jar side: Mythos, Anthropic makes a deal, Musk v Sam, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-mythos-anthropic) — Sun, 10 May 2026
-- [Tales from the jar side: Web Clipper's Reader Mode, Senior Project Presentations, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-web-clippers) — Sun, 03 May 2026
-- [Tales from the jar side: GPT Image 2, Open Brain, Anthropic Blunders, Meta is Evil, and the usual Social Media Posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-gpt-image) — Sun, 26 Apr 2026
+- [Tales from the jar side: Star Trek week, OpenAI and the Millennium prize, AI Slop license, and the usual social media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-star-trek-f07) — Sun, 13 Sep 2026
+- [Tales from the jar side: NVIDIA buys Hugging Face, Coding agent status lights, AI for academic success, Space Madness, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-nvidia-buys) — Sun, 06 Sep 2026
+- [Tales from the jar side: Imagination Library and Dolly, Run Claude Code with any model, Vote for Marlborough, and the usual social media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-imagination) — Sun, 30 Aug 2026
+- [Tales from the jar side: A Transporter Accident Scale, My Star Trek parody, Agentic commerce, and the usual social media nonsense](https://kenkousen.substack.com/p/tales-from-the-jar-side-a-transporter) — Mon, 24 Aug 2026
+- [Tales from the jar side: Cruise pics, Anthropic watermarks, Westbrook retires, and the usual Social media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-cruise-pics) — Mon, 17 Aug 2026
+- [Tales from the jar side: Color cover, Vacation pics, AI break out, and the usual Social media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-color-cover) — Sun, 09 Aug 2026
 
 # Recent YouTube videos (link the video URL when relevant)
 - [I "Distilled" Claude for $1.61 — Here's What Actually Transferred](https://www.youtube.com/watch?v=vd0K9_Ez1kU) — 2026-03-02

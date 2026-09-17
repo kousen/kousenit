@@ -30,6 +30,7 @@ jobs:
           node-version: "20"
 
       - name: Fetch latest newsletter + video feeds
+        id: fetch
         # Non-fatal: if a feed is down, keep the last-known recent.json and still rebuild.
         continue-on-error: true
         run: node scripts/fetch-feeds.mjs
@@ -50,3 +51,8 @@ jobs:
           else
             echo "No changes to commit."
           fi
+
+      - name: Fail the run if a feed was stale
+        # Runs last so fresh data from the working feed is still committed above.
+        if: steps.fetch.outcome == 'failure'
+        run: echo "::error::A feed fetch failed; see the fetch step log." && exit 1

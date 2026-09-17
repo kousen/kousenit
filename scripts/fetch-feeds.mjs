@@ -9,7 +9,9 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { dirname, join } from "node:path";
 
-export const SUBSTACK = "https://kenkousen.substack.com/feed";
+// Read via our own Pages Function (functions/api/substack-feed.js): Substack
+// 403s GitHub Actions IPs, but not Cloudflare's.
+export const SUBSTACK = "https://www.kousenit.com/api/substack-feed";
 export const YT_CHANNEL = "UCWmOARV8Lj5TE6LB1uGiguw";
 export const YOUTUBE = `https://www.youtube.com/feeds/videos.xml?channel_id=${YT_CHANNEL}`;
 export const MAX_ITEMS = 6;
@@ -88,4 +90,7 @@ if (isMain) {
     `Wrote data/recent.json: ${issues.length} issues (${issuesFresh.length} fresh), ` +
       `${videos.length} videos (${vidsFresh.length} fresh)`
   );
+  // A feed that fell back to prior data still exits non-zero, so CI goes red
+  // instead of silently serving stale items (Substack 403'd for 3 months in 2026).
+  if (!issuesFresh.length || !vidsFresh.length) process.exitCode = 1;
 }
