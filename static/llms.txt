@@ -27,12 +27,12 @@
 - [LangChain4j](https://github.com/kousen/LangChain4j_Training_course): Exercises and code for Ken's training course on the LangChain4j framework.
 
 ## Recent newsletter issues
+- [Tales from the jar side: My Claude Code book, Stranger New Worlds, Jev and other AI stuff, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-my-claude)
 - [Tales from the jar side: Star Trek week, OpenAI and the Millennium prize, AI Slop license, and the usual social media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-star-trek-f07)
 - [Tales from the jar side: NVIDIA buys Hugging Face, Coding agent status lights, AI for academic success, Space Madness, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-nvidia-buys)
 - [Tales from the jar side: Imagination Library and Dolly, Run Claude Code with any model, Vote for Marlborough, and the usual social media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-imagination)
 - [Tales from the jar side: A Transporter Accident Scale, My Star Trek parody, Agentic commerce, and the usual social media nonsense](https://kenkousen.substack.com/p/tales-from-the-jar-side-a-transporter)
 - [Tales from the jar side: Cruise pics, Anthropic watermarks, Westbrook retires, and the usual Social media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-cruise-pics)
-- [Tales from the jar side: Color cover, Vacation pics, AI break out, and the usual Social media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-color-cover)
 
 ## Recent videos
 - [I "Distilled" Claude for $1.61 — Here's What Actually Transferred](https://www.youtube.com/watch?v=vd0K9_Ez1kU)
