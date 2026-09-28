@@ -84,17 +84,17 @@ He is a great fit for engineering teams leveling up on modern Java/Kotlin, testi
 - LangChain4j: Exercises and code for Ken's training course on the LangChain4j framework. GitHub: https://github.com/kousen/LangChain4j_Training_course
 
 # Recent newsletter issues (link the issue URL when relevant)
+- [Tales from the jar side: New video about Claude Code with any model, Some stats about my job, and the usual Social Media gags](https://kenkousen.substack.com/p/tales-from-the-jar-side-new-video) — Sun, 27 Sep 2026
 - [Tales from the jar side: My Claude Code book, Stranger New Worlds, Jev and other AI stuff, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-my-claude) — Sun, 20 Sep 2026
 - [Tales from the jar side: Star Trek week, OpenAI and the Millennium prize, AI Slop license, and the usual social media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-star-trek-f07) — Sun, 13 Sep 2026
 - [Tales from the jar side: NVIDIA buys Hugging Face, Coding agent status lights, AI for academic success, Space Madness, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-nvidia-buys) — Sun, 06 Sep 2026
 - [Tales from the jar side: Imagination Library and Dolly, Run Claude Code with any model, Vote for Marlborough, and the usual social media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-imagination) — Sun, 30 Aug 2026
 - [Tales from the jar side: A Transporter Accident Scale, My Star Trek parody, Agentic commerce, and the usual social media nonsense](https://kenkousen.substack.com/p/tales-from-the-jar-side-a-transporter) — Mon, 24 Aug 2026
-- [Tales from the jar side: Cruise pics, Anthropic watermarks, Westbrook retires, and the usual Social media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-cruise-pics) — Mon, 17 Aug 2026
 
 # Recent YouTube videos (link the video URL when relevant)
+- [How I Use Any AI Model With Claude Code (Full Setup)](https://www.youtube.com/watch?v=gb2X5feZNak) — 2026-09-27
 - [I "Distilled" Claude for $1.61 — Here's What Actually Transferred](https://www.youtube.com/watch?v=vd0K9_Ez1kU) — 2026-03-02
 - [I stopped hating UI tests (here's why)](https://www.youtube.com/watch?v=-wyHSKOCZXs) — 2026-02-23
 - [I Created a Working Star Trek Computer (Full Java Stack)](https://www.youtube.com/watch?v=q8sXNXR6iKc) — 2026-02-17
 - [RAG Fundamentals: Hands on with LangChain, Spring AI, & LangChain4j](https://www.youtube.com/watch?v=3kMwv7Kraxk) — 2026-02-13
 - [When One Agent Isn’t Enough: Experiments with Multi-Agent AI](https://www.youtube.com/watch?v=ywh2KGDUv08) — 2026-01-28
-- [The Biggest Mistake Developers Make With AI Agents #ai #coding](https://www.youtube.com/watch?v=GTR7KnHnn-w) — 2025-09-04

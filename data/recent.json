@@ -1,6 +1,11 @@
 {
   "issues": [
     {
+      "title": "Tales from the jar side: New video about Claude Code with any model, Some stats about my job, and the usual Social Media gags",
+      "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-new-video",
+      "date": "Sun, 27 Sep 2026"
+    },
+    {
       "title": "Tales from the jar side: My Claude Code book, Stranger New Worlds, Jev and other AI stuff, and the usual Social Media silliness",
       "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-my-claude",
       "date": "Sun, 20 Sep 2026"
@@ -24,14 +29,14 @@
       "title": "Tales from the jar side: A Transporter Accident Scale, My Star Trek parody, Agentic commerce, and the usual social media nonsense",
       "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-a-transporter",
       "date": "Mon, 24 Aug 2026"
-    },
-    {
-      "title": "Tales from the jar side: Cruise pics, Anthropic watermarks, Westbrook retires, and the usual Social media silliness",
-      "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-cruise-pics",
-      "date": "Mon, 17 Aug 2026"
     }
   ],
   "videos": [
+    {
+      "title": "How I Use Any AI Model With Claude Code (Full Setup)",
+      "url": "https://www.youtube.com/watch?v=gb2X5feZNak",
+      "date": "2026-09-27"
+    },
     {
       "title": "I \"Distilled\" Claude for $1.61 — Here's What Actually Transferred",
       "url": "https://www.youtube.com/watch?v=vd0K9_Ez1kU",
@@ -56,11 +61,6 @@
       "title": "When One Agent Isn’t Enough: Experiments with Multi-Agent AI",
       "url": "https://www.youtube.com/watch?v=ywh2KGDUv08",
       "date": "2026-01-28"
-    },
-    {
-      "title": "The Biggest Mistake Developers Make With AI Agents #ai #coding",
-      "url": "https://www.youtube.com/watch?v=GTR7KnHnn-w",
-      "date": "2025-09-04"
     }
   ]
 }
