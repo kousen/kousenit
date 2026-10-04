@@ -28,6 +28,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: "22"
+          package-manager-cache: false # scripts have no deps; v5 would otherwise look for pnpm
 
       - name: Fetch latest newsletter + video feeds
         id: fetch
