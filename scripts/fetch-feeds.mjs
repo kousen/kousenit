@@ -56,10 +56,16 @@ export function parseYouTube(xml, max = MAX_ITEMS) {
     .filter((v) => v.title && v.url);
 }
 
-async function getText(url) {
-  const res = await fetch(url, { headers: { "User-Agent": "kousenit-feed-bot/1.0" } });
-  if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
-  return res.text();
+// Retries 429/5xx (Substack intermittently rate-limits the relay's egress IPs);
+// a 4xx that isn't 429 is a real problem and fails immediately.
+async function getText(url, tries = 3) {
+  for (let i = 1; ; i++) {
+    const res = await fetch(url, { headers: { "User-Agent": "kousenit-feed-bot/1.0" } });
+    if (res.ok) return res.text();
+    if (i >= tries || (res.status !== 429 && res.status < 500)) throw new Error(`${url} -> HTTP ${res.status}`);
+    console.error(`${url} -> HTTP ${res.status}, retry ${i}/${tries - 1}`);
+    await new Promise((r) => setTimeout(r, 15_000 * i)); // 15s, then 30s
+  }
 }
 
 // --- CLI (network + write) ---
