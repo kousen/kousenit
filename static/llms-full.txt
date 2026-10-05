@@ -84,12 +84,12 @@ He is a great fit for engineering teams leveling up on modern Java/Kotlin, testi
 - LangChain4j: Exercises and code for Ken's training course on the LangChain4j framework. GitHub: https://github.com/kousen/LangChain4j_Training_course
 
 # Recent newsletter issues (link the issue URL when relevant)
+- [Tales from the jar side: The bitter lesson, A chess tournament, Community over Code, New AI stuff, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-the-bitter) — Mon, 05 Oct 2026
 - [Tales from the jar side: New video about Claude Code with any model, Some stats about my job, and the usual Social Media gags](https://kenkousen.substack.com/p/tales-from-the-jar-side-new-video) — Sun, 27 Sep 2026
 - [Tales from the jar side: My Claude Code book, Stranger New Worlds, Jev and other AI stuff, and the usual Social Media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-my-claude) — Sun, 20 Sep 2026
 - [Tales from the jar side: Star Trek week, OpenAI and the Millennium prize, AI Slop license, and the usual social media silliness](https://kenkousen.substack.com/p/tales-from-the-jar-side-star-trek-f07) — Sun, 13 Sep 2026
 - [Tales from the jar side: NVIDIA buys Hugging Face, Coding agent status lights, AI for academic success, Space Madness, and the usual Social Media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-nvidia-buys) — Sun, 06 Sep 2026
 - [Tales from the jar side: Imagination Library and Dolly, Run Claude Code with any model, Vote for Marlborough, and the usual social media posts](https://kenkousen.substack.com/p/tales-from-the-jar-side-imagination) — Sun, 30 Aug 2026
-- [Tales from the jar side: A Transporter Accident Scale, My Star Trek parody, Agentic commerce, and the usual social media nonsense](https://kenkousen.substack.com/p/tales-from-the-jar-side-a-transporter) — Mon, 24 Aug 2026
 
 # Recent YouTube videos (link the video URL when relevant)
 - [How I Use Any AI Model With Claude Code (Full Setup)](https://www.youtube.com/watch?v=gb2X5feZNak) — 2026-09-27
