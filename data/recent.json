@@ -1,6 +1,11 @@
 {
   "issues": [
     {
+      "title": "Tales from the jar side: Adventures in kerning, Walter Koenig, Patrick Stewart, Early voting, and the usual Social Media silliness",
+      "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-adventures-6a2",
+      "date": "Mon, 02 Nov 2026"
+    },
+    {
       "title": "Tales from the jar side: Claude Duet, JetBrains Air, a real Python, and the usual Social Media Posts",
       "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-claude-duet",
       "date": "Mon, 26 Oct 2026"
@@ -24,11 +29,6 @@
       "title": "Tales from the jar side: New video about Claude Code with any model, Some stats about my job, and the usual Social Media gags",
       "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-new-video",
       "date": "Sun, 27 Sep 2026"
-    },
-    {
-      "title": "Tales from the jar side: My Claude Code book, Stranger New Worlds, Jev and other AI stuff, and the usual Social Media silliness",
-      "url": "https://kenkousen.substack.com/p/tales-from-the-jar-side-my-claude",
-      "date": "Sun, 20 Sep 2026"
     }
   ],
   "videos": [
