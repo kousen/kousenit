@@ -67,5 +67,9 @@ markup:
     lineNos: false
 security:
   _merge: deep
+  # Hugo 0.161+ runs the Tailwind CLI as an external Node script, so it must be on the
+  # exec allowlist. The list replaces Hugo's default, hence the other entries.
+  exec:
+    allow: ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']
 sitemap:
   _merge: deep
