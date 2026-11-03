@@ -47,9 +47,15 @@ outputs:
   section: [HTML, RSS]
 imaging:
   resampleFilter: lanczos
-  quality: 90
   anchor: smart
-  hint: picture
+  # Hugo 0.163+ deprecated the top-level quality/hint keys in favour of per-format ones.
+  jpeg:
+    quality: 90
+  webp:
+    quality: 90
+    hint: picture
+  avif:
+    quality: 90
 timeout: 600000
 taxonomies:
   author: authors
