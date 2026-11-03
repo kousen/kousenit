@@ -33,6 +33,11 @@
   ],
   "videos": [
     {
+      "title": "AI Tools for Academic Success  (Trinity College first-year orientation,)",
+      "url": "https://www.youtube.com/watch?v=zLgsNOeqfU8",
+      "date": "2026-11-02"
+    },
+    {
       "title": "How I Use Any AI Model With Claude Code (Full Setup)",
       "url": "https://www.youtube.com/watch?v=gb2X5feZNak",
       "date": "2026-09-27"
@@ -56,11 +61,6 @@
       "title": "RAG Fundamentals: Hands on with LangChain, Spring AI, & LangChain4j",
       "url": "https://www.youtube.com/watch?v=3kMwv7Kraxk",
       "date": "2026-02-13"
-    },
-    {
-      "title": "When One Agent Isn’t Enough: Experiments with Multi-Agent AI",
-      "url": "https://www.youtube.com/watch?v=ywh2KGDUv08",
-      "date": "2026-01-28"
     }
   ]
 }

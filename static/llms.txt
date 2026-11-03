@@ -35,12 +35,12 @@
 - [Tales from the jar side: New video about Claude Code with any model, Some stats about my job, and the usual Social Media gags](https://kenkousen.substack.com/p/tales-from-the-jar-side-new-video)
 
 ## Recent videos
+- [AI Tools for Academic Success  (Trinity College first-year orientation,)](https://www.youtube.com/watch?v=zLgsNOeqfU8)
 - [How I Use Any AI Model With Claude Code (Full Setup)](https://www.youtube.com/watch?v=gb2X5feZNak)
 - [I "Distilled" Claude for $1.61 — Here's What Actually Transferred](https://www.youtube.com/watch?v=vd0K9_Ez1kU)
 - [I stopped hating UI tests (here's why)](https://www.youtube.com/watch?v=-wyHSKOCZXs)
 - [I Created a Working Star Trek Computer (Full Java Stack)](https://www.youtube.com/watch?v=q8sXNXR6iKc)
 - [RAG Fundamentals: Hands on with LangChain, Spring AI, & LangChain4j](https://www.youtube.com/watch?v=3kMwv7Kraxk)
-- [When One Agent Isn’t Enough: Experiments with Multi-Agent AI](https://www.youtube.com/watch?v=ywh2KGDUv08)
 
 ## Links
 - [Newsletter (Tales from the jar side)](https://kenkousen.substack.com)
